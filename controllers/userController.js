@@ -15,7 +15,7 @@ class userController {
 
         if (!user || user.userPassword !== userPassword) {
             // 登入失敗，渲染相同的登入頁面並顯示錯誤消息
-            return res.render('login', { error: '無效的用戶名或密碼' });
+            return res.render('login', { error: 'Invalid username or password!' });
         }
 
         // 登入成功，設置會話
