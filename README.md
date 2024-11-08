@@ -11,4 +11,5 @@
 
 
 ## 已完成的UI介面
-- 登入&註冊畫面 (暫定初稿)
+- 登入&註冊畫面 (暫定初稿，參考：https://www.youtube.com/watch?v=fC3qLUWf_Lk)
+    ![loginUI](/public/image/logo.png "loginUI")
