@@ -2,6 +2,7 @@
 const express = require('express');
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
+const UserModel = require('./models/userModel');
 
 // 導入路由
 const userRoutes = require('./routes/userRoutes');
@@ -25,6 +26,7 @@ app.use(session({ // 設置會話規則
     resave: false,
     saveUninitialized: true
 }));
+app.use('/public', express.static('public'));
 
 // ----------------------
 
@@ -32,7 +34,7 @@ app.use(session({ // 設置會話規則
 app.use('/user', userRoutes); // 登入功能路由
 
 // 根路由 
-app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
     res.render('index', { userId: req.session.userId });
 });
 

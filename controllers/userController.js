@@ -9,16 +9,17 @@ class userController {
 
     // 登入功能
     async login(req, res) {
-        const { username, password } = req.body;
-        const user = UserModel.findOne({ username });
+        const { userName, userPassword } = req.body;
+        const user = await UserModel.findUserByUserName(userName);
+        console.log(user);
 
-        if (!user || user.password !== password) {
+        if (!user || user.userPassword !== userPassword) {
             // 登入失敗，渲染相同的登入頁面並顯示錯誤消息
             return res.render('login', { error: '無效的用戶名或密碼' });
         }
 
         // 登入成功，設置會話
-        req.session.userId = user.username; // 使用會話
+        req.session.userId = user.userName; // 使用會話
         res.redirect('/'); // 成功後重定向到首頁
     }
 
