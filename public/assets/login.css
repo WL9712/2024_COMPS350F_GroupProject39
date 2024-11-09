@@ -73,10 +73,6 @@ form.sign-up-form {
   pointer-events: none;
 }
 
-.error-message {
-  margin-bottom: 10px;
-}
-
 .logo {
   display: flex;
   align-items: center;
@@ -89,10 +85,9 @@ form.sign-up-form {
 
 .logo h4 {
   font-size: 1.1rem;
+  margin-top: -9px;
   letter-spacing: -0.5px;
   color: #151111;
-  margin-left: 5px;
-
 }
 
 .heading h2 {

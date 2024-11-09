@@ -12,31 +12,33 @@
   <!-- 設置頁面標題 -->
   <title>Sign in & Sign up Form</title>
   <!-- 引入CSS樣式文件 -->
-  <link rel="stylesheet" href="../public/assets/style.css" />
+  <link rel="stylesheet" href="../public/assets/login.css" />
+  
 </head>
 
 <body>
   <main>
-    <!-- 主內容區域 -->
+
+     
     <div class="box">
-      <!-- 用於包裝內部內容的容器 -->
+
       <div class="inner-box">
-        <!-- 表單包裝區 -->
+
         <div class="forms-wrap">
-          <!-- 登入表單 -->
+
           <form action="/user/login" method="POST" autocomplete="off" class="sign-in-form">
             <div class="logo">
-              <!-- 顯示網站標誌的圖片 -->
+
               <img src="../public/image/logo.png" alt="easyclass" />
-              <!-- 網站名稱顯示 -->
+
               <h4>FoodDelivery.Com</h4>
             </div>
 
             <div class="heading">
-              <!-- 標題區 -->
+
               <h2>Welcome Back</h2>
               <h6>Not registred yet?</h6>
-              <!-- 切換到註冊表單的連結 -->
+
               <a href="#" class="toggle">Sign up</a>
             </div>
 
@@ -49,75 +51,75 @@
                   <p style="color: green;" class="success-message">
                     <%= success %>
                       <% } %>
-                        <!-- 實際的輸入表單 -->
+
                         <div class="input-wrap">
                           <input type="text" id="userID" name="userID" minlength="4" class="input-field"
                             autocomplete="off" required />
-                          <!-- 輸入標籤 -->
+
                           <label>User ID</label>
                         </div>
 
                         <div class="input-wrap">
                           <input type="password" id="password" name="userPassword" minlength="4" class="input-field"
                             autocomplete="off" required />
-                          <!-- 密碼輸入標籤 -->
+
                           <label>Password</label>
                         </div>
 
-                        <!-- 提交按鈕 -->
+
                         <input type="submit" value="Sign In" class="sign-btn" />
 
                         <p class="text">
-                          <!-- 忘記密碼的提示信息 -->
+
                           Forgotten your password or you login datails?
-                          <!-- 獲取幫助的連結 -->
+
                           <a href="#">Get help</a> signing in
                         </p>
             </div>
           </form>
 
-          <!-- 註冊表單 -->
+
           <form action="/user/signup" method="POST" autocomplete="off" class="sign-up-form">
             <div class="logo">
-              <!-- 顯示網站標誌的圖片 -->
+
               <img src="../public/image/logo.png" alt="easyclass" />
-              <!-- 網站名稱顯示 -->
+
               <h4>FoodDelivery.Com</h4>
             </div>
 
             <div class="heading">
-              <!-- 標題區 -->
+
               <h2>Get Started</h2>
               <h6>Already have an account?</h6>
-              <!-- 切換到登入表單的連結 -->
+
               <a href="#" class="toggle">Login</a>
             </div>
 
             <div class="actual-form">
-              <!-- 實際的輸入表單 -->
+
               <div class="input-wrap">
                 <input type="text" name="userID" minlength="4" class="input-field" autocomplete="off" required />
-                <!-- 輸入標籤 -->
+
                 <label>User ID</label>
               </div>
 
               <div class="input-wrap">
                 <input type="email" name="userEmail" class="input-field" autocomplete="off" required />
-                <!-- 郵箱輸入標籤 -->
+
                 <label>Email</label>
               </div>
 
               <div class="input-wrap">
                 <input type="password" name="userPassword" minlength="4" class="input-field" autocomplete="off" required />
-                <!-- 密碼輸入標籤 -->
+
                 <label>Password</label>
               </div>
 
-              <!-- 提交按鈕 -->
+
               <input type="submit" value="Sign Up" class="sign-btn" />
 
               <p class="text">
-                <!-- 註冊後同意的條款與條件 -->
+
                 By signing up, I agree to the
                 <a href="#">Terms of Services</a> and
                 <a href="#">Privacy Policy</a>
@@ -127,19 +129,19 @@
         </div>
 
         <div class="carousel">
-          <!-- 圖片輪播區 -->
+
           <div class="images-wrapper">
-            <!-- 輪播的圖片 -->
+
             <img src="../public/image/image1.png" class="image img-1 show" alt="" />
             <img src="../public/image/image2.png" class="image img-2" alt="" />
             <img src="../public/image/image3.png" class="image img-3" alt="" />
           </div>
 
           <div class="text-slider">
-            <!-- 文字滑動顯示區 -->
+
             <div class="text-wrap">
               <div class="text-group">
-                <!-- 顯示的課程創建提示文字 -->
+
                 <h2>At any time, anywhere</h2>
                 <h2>On-demand delivery</h2>
                 <h2>Inconceivable delivery efficiency</h2>
@@ -147,7 +149,7 @@
             </div>
 
             <div class="bullets">
-              <!-- 圖片輪播的導航點 -->
+
               <span class="active" data-value="1"></span>
               <span data-value="2"></span>
               <span data-value="3"></span>
@@ -159,7 +161,7 @@
   </main>
 
   <!-- 引入JavaScript文件 -->
-  <script src="../public/js/app.js"></script>
+  <script src="../public/js/login.js"></script>
 </body>
 
 </html>
