@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/restaurant/registerRestaurant" method="POST">
+        <% if (result) { %>
+            <p style="color: green;">Restaurant registration successful</p>
+        <% } %>
+        <input type="text" name="restaurantName" placeholder="restaurantName">
+        <input type="text" name="restaurantCity" placeholder="restaurantCity">
+        <input type="text" name="restaurantStreet" placeholder="restaurantStreet">
+        <input type="submit" value="Sign In" class="sign-btn" />
+    </form>
+</body>
+</html>

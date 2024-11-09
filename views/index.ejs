@@ -10,6 +10,7 @@
     <% if (userId) { %>
         <p>Hello, <%= userId %>!</p>
         <button onclick="window.location.href='/user/logout'">登出</button>
+        <button onclick="window.location.href='/restaurant/registerRestaurant'">菜單</button>
     <% } else { %>
         <p>Please login !</p>
         <button onclick="window.location.href='/user/login'">登入</button>

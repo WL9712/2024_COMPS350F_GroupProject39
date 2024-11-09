@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <!-- 設置視口以適應不同的設備螢幕大小 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="img/logo.png" rel="shortcut icon" />
+  <link href="../public/image/logo.png" rel="shortcut icon" />
   <!-- 設置頁面標題 -->
   <title>Sign in & Sign up Form</title>
   <!-- 引入CSS樣式文件 -->
@@ -45,36 +45,39 @@
                 <p style="color: red;" class="error-message">
                   <%= error %>
                 </p>
-                <% } %>
-                  <!-- 實際的輸入表單 -->
-                  <div class="input-wrap">
-                    <input type="text" id="username" name="userName" minlength="4" class="input-field"
-                      autocomplete="off" required />
-                    <!-- 輸入標籤 -->
-                    <label>Name</label>
-                  </div>
+                <% } else if (success) { %>
+                  <p style="color: green;" class="success-message">
+                    <%= success %>
+                      <% } %>
+                        <!-- 實際的輸入表單 -->
+                        <div class="input-wrap">
+                          <input type="text" id="userID" name="userID" minlength="4" class="input-field"
+                            autocomplete="off" required />
+                          <!-- 輸入標籤 -->
+                          <label>User ID</label>
+                        </div>
 
-                  <div class="input-wrap">
-                    <input type="password" id="password" name="userPassword" minlength="4" class="input-field"
-                      autocomplete="off" required />
-                    <!-- 密碼輸入標籤 -->
-                    <label>Password</label>
-                  </div>
+                        <div class="input-wrap">
+                          <input type="password" id="password" name="userPassword" minlength="4" class="input-field"
+                            autocomplete="off" required />
+                          <!-- 密碼輸入標籤 -->
+                          <label>Password</label>
+                        </div>
 
-                  <!-- 提交按鈕 -->
-                  <input type="submit" value="Sign In" class="sign-btn" />
+                        <!-- 提交按鈕 -->
+                        <input type="submit" value="Sign In" class="sign-btn" />
 
-                  <p class="text">
-                    <!-- 忘記密碼的提示信息 -->
-                    Forgotten your password or you login datails?
-                    <!-- 獲取幫助的連結 -->
-                    <a href="#">Get help</a> signing in
-                  </p>
+                        <p class="text">
+                          <!-- 忘記密碼的提示信息 -->
+                          Forgotten your password or you login datails?
+                          <!-- 獲取幫助的連結 -->
+                          <a href="#">Get help</a> signing in
+                        </p>
             </div>
           </form>
 
           <!-- 註冊表單 -->
-          <form action="index.html" autocomplete="off" class="sign-up-form">
+          <form action="/user/signup" method="POST" autocomplete="off" class="sign-up-form">
             <div class="logo">
               <!-- 顯示網站標誌的圖片 -->
               <img src="../public/image/logo.png" alt="easyclass" />
@@ -87,25 +90,25 @@
               <h2>Get Started</h2>
               <h6>Already have an account?</h6>
               <!-- 切換到登入表單的連結 -->
-              <a href="#" class="toggle">Sign in</a>
+              <a href="#" class="toggle">Login</a>
             </div>
 
             <div class="actual-form">
               <!-- 實際的輸入表單 -->
               <div class="input-wrap">
-                <input type="text" minlength="4" class="input-field" autocomplete="off" required />
+                <input type="text" name="userID" minlength="4" class="input-field" autocomplete="off" required />
                 <!-- 輸入標籤 -->
-                <label>Name</label>
+                <label>User ID</label>
               </div>
 
               <div class="input-wrap">
-                <input type="email" class="input-field" autocomplete="off" required />
+                <input type="email" name="userEmail" class="input-field" autocomplete="off" required />
                 <!-- 郵箱輸入標籤 -->
                 <label>Email</label>
               </div>
 
               <div class="input-wrap">
-                <input type="password" minlength="4" class="input-field" autocomplete="off" required />
+                <input type="password" name="userPassword" minlength="4" class="input-field" autocomplete="off" required />
                 <!-- 密碼輸入標籤 -->
                 <label>Password</label>
               </div>

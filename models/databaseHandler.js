@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 class DatabaseHandler {
 
     constructor() {
@@ -8,46 +9,82 @@ class DatabaseHandler {
     }
 
     async connect() {
-
         try {
             await mongoose.connect(this.dbUrl);
             this.isConnected = true;
-            console.log(`Connected successfully to MongoDB database: ${this.dbUrl}`);
+            console.log(debugLogheader("Databasehandler.connect()") + `Connected successfully to MongoDB database: ${this.dbUrl}`);
         } catch (err) {
-            console.error('Database connection error:', err);
+            console.error(debugLogheader("Databasehandler.connect()") + 'Database connection error:', err);
             process.exit(1); // 连接失败时退出应用
-        } finally {
-
         }
-
     }
 
 
     async disconnect() {
-  
         if (this.isConnected) {
             await mongoose.connection.close();
             this.isConnect = false;
-            console.log('Database connection closed');
+            console.log(debugLogheader("Databasehandler.disconnect()") + 'Database connection closed');
+        }
+    }
+
+    // 查找数据
+    async findOne(mongooseModel, queryObject) {
+        try {
+            await this.connect();
+            const result = await mongooseModel.findOne(queryObject);
+            console.log(debugLogheader("Databasehandler.findOne()") + 'Data found:', result);
+            return result;
+        } catch (err) {
+            console.error(debugLogheader("Databasehandler.findOne()") + 'Find data error:', err);
+            throw err;
+        } finally {
+            await this.disconnect();
+        }
+    }
+
+    async findMany(mongooseModel, queryObject) {
+        try {
+            await this.connect();
+            const result = await mongooseModel.findMany(queryObject);
+            console.log(debugLogheader("Databasehandler.findMany()") + 'Data found:', result);
+            return result;
+        } catch (err) {
+            console.error(debugLogheader("Databasehandler.findMany()") + 'Find data error:', err);
+            throw err;
+        } finally {
+            await this.disconnect();
+        }
+    }
+
+    // 查找多个数据
+    async findAll(mongooseModel) {
+        try {
+            await this.connect();
+            const result = await mongooseModel.findAll().toArray();
+            console.log(debugLogheader("Databasehandler.findAll()") + 'Data found:', result);
+            return result;
+        } catch (err) {
+            console.error(debugLogheader("Databasehandler.findAll()") + 'Find data error:', err);
+            throw err;
+        } finally {
+            await this.disconnect();
         }
     }
 
     // 插入数据
-    async insert(collection, data) {
-        // 插入数据的逻辑
-        
-    }
-
-    // 查找数据
-    async find(collection, query) {
-        // 查找并返回满足查询条件的数据
-
-
-    }
-
-    // 查找多个数据
-    async findAll(collection, query) {
-        // 查找并返回所有满足查询条件的数据
+    async insertOne(mongooseModel, queryObject) {
+        try {
+            await this.connect();
+            const result = await mongooseModel.create(queryObject);
+            console.log(debugLogheader("Databasehandler.insertOne()") + 'Data inserted successfully:', result);
+            return result;
+        } catch (err) {
+            console.error(debugLogheader("Databasehandler.insertOne()") + 'Insert data error:', err);
+            throw err;
+        } finally {
+            await this.disconnect();
+        }
     }
 
     // 更新数据

@@ -3,9 +3,11 @@ const express = require('express');
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const UserModel = require('./models/userModel');
+require('./lib/debugLogheader');
 
 // 導入路由
 const userRoutes = require('./routes/userRoutes');
+const restaurantRoutes = require('./routes/restaurantRoutes');
 
 // 創建依賴實體
 const app = express();
@@ -32,6 +34,8 @@ app.use('/public', express.static('public'));
 
 // 使用路由
 app.use('/user', userRoutes); // 登入功能路由
+
+app.use('/restaurant', restaurantRoutes); // 餐廳功能路由
 
 // 根路由 
 app.get('/', async (req, res) => {

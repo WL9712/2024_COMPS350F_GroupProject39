@@ -6,8 +6,19 @@ class UserModel { // 定義一個名為 UserModel 的類別
     constructor() { // 構造函數，當創建 UserModel 的實例時會自動調用
         // 定義一個用戶的資料結構，包含用戶名和用戶密碼
         this.userSchema = new mongoose.Schema({
-            userName: {type: String, required: true}, // userName 必須是字符串類型且必填
-            userPassword: {type: String, required: true} // userPassword 必須是字符串類型且必填
+            userID: { type: String, required: true }, // userID 必须是字符串类型且必填
+            userPassword: { type: String, required: true },
+            userEmail: { type: String, required: true },
+            userRole: { type: String, required: true },
+            personalInfo: {
+                type: {
+                    name: { type: String }, // 直接定义字段，而不是嵌套在 type 中
+                    phone: { type: String },
+                    address: { type: String }
+                },
+                default: {} // 默认为空对象
+            },
+            createAt: { type: Date, default: Date.now }
         });
 
         // 檢查是否已經定義過 User 模型
@@ -18,27 +29,39 @@ class UserModel { // 定義一個名為 UserModel 的類別
             // 如果已經存在 User 模型，則直接使用它
             this.User = mongoose.models.User; // 使用已存在的模型
         }
+
+        this.collectionName = 'users'; // 定義集合名稱
+        this.db = new DatabaseHandler(); // 創建一個新的 DatabaseHandler 實例來處理資料庫操作
     }    
     
-    // 靜態方法，用來查詢所有用戶
-    static async findAllUser() {
-        let db = new DatabaseHandler(); // 創建一個新的 DatabaseHandler 實例來處理資料庫操作
-        await db.connect(); // 連接到資料庫
-        let instance = new UserModel(); // 創建 UserModel 的實例，以便使用其模型
-        let result = await instance.User.find(); // 查詢所有用戶資料
-        await db.disconnect(); // 查詢完成後斷開資料庫連接
-        return result; // 返回查詢結果
+
+    async findAllUser() {
+        try {
+            let result = await this.db.findAll(this.User);
+            return result; // 返回查詢結果
+        } catch (err) {
+            throw err;
+        }
     }
 
-    // 靜態方法，根據用戶名稱查詢單個用戶
-    static async findUserByUserName(userName) {
-        let db = new DatabaseHandler(); // 創建 DatabaseHandler 的實例
-        await db.connect(); // 連接到資料庫
-        let instance = new UserModel(); // 創建 UserModel 的實例
-        // 查詢符合指定用戶名稱的單個用戶資料
-        let result = await instance.User.findOne({userName: userName});
-        await db.disconnect(); // 查詢完成後斷開資料庫連接
-        return result; // 返回查詢結果
+    async findUserByuserID(userID) {
+        try {
+            let result = await this.db.findOne(this.User, { userID: userID });
+            return result; // 返回查詢結果  
+        } catch (err) {
+            throw err;
+        }
+    }
+
+    async insertUser(userID, userPassword, userEmail, userRole) {
+        try {
+            let result = await this.db.insertOne(this.User, { 
+                userID: userID, userPassword: userPassword, userEmail: userEmail, userRole: userRole 
+            });
+            return result; // 返回插入結果
+        } catch (err) {
+            throw err;
+        }
     }
 }
 
