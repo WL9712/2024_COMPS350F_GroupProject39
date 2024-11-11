@@ -24,7 +24,7 @@ class UserController {
         const userModel = new UserModel();
         try {
             const user = await userModel.findUserByuserID(userID);
-            console.log(user);
+            // console.log(user);
             if (!user || user.userPassword !== userPassword) {
                 // 登入失敗，渲染相同的登入頁面並顯示錯誤消息
                 return this.renderWithDefaults(res, 'login', { error: 'Invalid user account or password!' });
@@ -34,7 +34,7 @@ class UserController {
             req.session.user = user; // 使用會話
             res.redirect('/'); // 成功後重定向到首頁
         } catch (err) {
-            console.error(debugLogheader("UserController.login()") + err);
+            // console.error(debugLogheader("UserController.login()") + err);
             this.renderWithDefaults(res, 'login', { error: 'An error occurred!' });
         }
     }
@@ -61,7 +61,7 @@ class UserController {
             this.renderWithDefaults(res, 'login', { success: 'User account created successfully!' });
         } catch (err) {
             // 錯誤處理
-            console.error(debugLogheader("UserController.signup()") + err.code);
+            // console.error(debugLogheader("UserController.signup()") + err.code);
             
             // 根據錯誤代碼進行不同的處理
             if (err.code === 11000) { // 重複鍵錯誤

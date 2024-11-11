@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insert Menu</title>
+</head>
+<body>
+    <a href="/"><h1>COMP S350F - Group Project 39 - Insert Menu Page</h1></a>
+    <% if (error) { %>
+        <p style="color: red;"><%= error %></p>
+    <% } else if (success) { %> 
+        <p style="color: green;"><%= success %></p>
+    <% } %>
+
+    <form action="/restaurant/insertMenu" method="POST" enctype="multipart/form-data">
+        Restaurant Name:
+        <select name="restaurantName" id="restaurantName">
+            <% for (let i = 0; i < restaurantList.length; i++) { %>
+                <option value="<%= restaurantList[i].restaurantName %>">
+                    <%= restaurantList[i].restaurantName %>
+                </option>
+            <% } %>
+        </select><br/>
+        Menu Name:
+        <input type="text" name="menuItemName" placeholder="menuName"><br/>
+        Menu Price:
+        <input type="number" name="menuItemPrice" placeholder="menuPrice"><br/>
+        Menu Image:
+        <input type="file"  accept="image/*"  name="menuImage"><br/>
+        <input type="submit" value="Insert Menu">
+    </form>
+</body>
+</html>

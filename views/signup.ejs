@@ -20,25 +20,26 @@
                         <form action="/user/signup" method="POST" autocomplete="off" class="sign-up-form">
 
                             <div class="input-wrap">
+                                <label>User ID</label>
                                 <input type="text" name="userID" minlength="4" class="input-field" autocomplete="off"
                                     required />
 
-                                <label>User ID</label>
+                                
                             </div>
 
                             <div class="input-wrap">
+                                <label>Email</label>
                                 <input type="email" name="userEmail" class="input-field" autocomplete="off" required />
 
-                                <label>Email</label>
                             </div>
 
                             <div class="input-wrap">
+                                <label>Password</label>
                                 <input type="password" name="userPassword" minlength="4" class="input-field"
                                     autocomplete="off" required />
 
-                                <label>Password</label>
                             </div>
-
+                            <label>User Role</label>
                             <select  name="userRole" required>
                                 <option value="customer">Customer</option>
                                 <option value="restaurant">Restaurant</option>

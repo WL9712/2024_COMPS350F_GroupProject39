@@ -8,12 +8,15 @@
 <body>
     <a href="/"><h1>COMP S350F - Group Project 39 - Register Restaruant Page</h1></a>
     <form action="/restaurant/registerRestaurant" method="POST">
-        <% if (result) { %>
+        <% if (success) { %>
             <p style="color: green;">Restaurant registration successful</p>
         <% } %>
-        <input type="text" name="restaurantName" placeholder="restaurantName">
-        <input type="text" name="restaurantCity" placeholder="restaurantCity">
-        <input type="text" name="restaurantStreet" placeholder="restaurantStreet">
+        Restaruant Name:
+        <input type="text" name="restaurantName" placeholder="restaurantName"><br/>
+        Restaruant City:
+        <input type="text" name="restaurantCity" placeholder="restaurantCity"><br/>
+        Restaruant Street:
+        <input type="text" name="restaurantStreet" placeholder="restaurantStreet"><br/>
         <input type="submit" value="Sign In" class="sign-btn" />
     </form>
 

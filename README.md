@@ -34,12 +34,7 @@ Now that you have npm installed, you can run npm commands. Here are some common 
 
 \- Install a package: To install a package (e.g., express), run:
 
-    npm install express
-    npm install body-parser
-    npm install cookie-session
-    npm install ejs
-    npm install mongoose
-    npm install
+    npm install express body-parser cookie-session ejs mongoose 
 
 
 ## 4. Running Project
@@ -54,7 +49,7 @@ If you have scripts defined in your package.json, you can run them using:
 
 
 ## All Functions
-- Login & Sign up (Finish Logic)
+- Login & Sign up (Finish)
 
 ### Customor
 - Browse Menu
@@ -64,7 +59,7 @@ If you have scripts defined in your package.json, you can run them using:
 - Make Payment
 
 ### Restaurant
-- Manage Menu
+- Manage Menu (Finish Insert Menu)
 - Accept Order
 - Update Order Status
 

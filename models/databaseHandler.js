@@ -12,9 +12,9 @@ class DatabaseHandler {
         try {
             await mongoose.connect(this.dbUrl);
             this.isConnected = true;
-            console.log(debugLogheader("Databasehandler.connect()") + `Connected successfully to MongoDB database: ${this.dbUrl}`);
+            // console.log(debugLogheader("Databasehandler.connect()") + `Connected successfully to MongoDB database: ${this.dbUrl}`);
         } catch (err) {
-            console.error(debugLogheader("Databasehandler.connect()") + 'Database connection error:', err);
+            // console.error(debugLogheader("Databasehandler.connect()") + 'Database connection error:', err);
             process.exit(1); // 连接失败时退出应用
         }
     }
@@ -24,7 +24,7 @@ class DatabaseHandler {
         if (this.isConnected) {
             await mongoose.connection.close();
             this.isConnect = false;
-            console.log(debugLogheader("Databasehandler.disconnect()") + 'Database connection closed');
+            // console.log(debugLogheader("Databasehandler.disconnect()") + 'Database connection closed');
         }
     }
 
@@ -33,10 +33,10 @@ class DatabaseHandler {
         try {
             await this.connect();
             const result = await mongooseModel.findOne(queryObject);
-            console.log(debugLogheader("Databasehandler.findOne()") + 'Data found:', result);
+            // console.log(debugLogheader("Databasehandler.findOne()") + 'Data found:', result);
             return result;
         } catch (err) {
-            console.error(debugLogheader("Databasehandler.findOne()") + 'Find data error:', err);
+            // console.error(debugLogheader("Databasehandler.findOne()") + 'Find data error:', err);
             throw err;
         } finally {
             await this.disconnect();
@@ -46,11 +46,11 @@ class DatabaseHandler {
     async findMany(mongooseModel, queryObject) {
         try {
             await this.connect();
-            const result = await mongooseModel.findMany(queryObject);
-            console.log(debugLogheader("Databasehandler.findMany()") + 'Data found:', result);
+            const result = await mongooseModel.find(queryObject);
+            // console.log(debugLogheader("Databasehandler.findMany()") + 'Data found:', result);
             return result;
         } catch (err) {
-            console.error(debugLogheader("Databasehandler.findMany()") + 'Find data error:', err);
+            // console.error(debugLogheader("Databasehandler.findMany()") + 'Find data error:', err);
             throw err;
         } finally {
             await this.disconnect();
@@ -61,11 +61,11 @@ class DatabaseHandler {
     async findAll(mongooseModel) {
         try {
             await this.connect();
-            const result = await mongooseModel.findAll().toArray();
-            console.log(debugLogheader("Databasehandler.findAll()") + 'Data found:', result);
+            const result = await mongooseModel.find({});
+            // console.log(debugLogheader("Databasehandler.findAll()") + 'Data found:', result);
             return result;
         } catch (err) {
-            console.error(debugLogheader("Databasehandler.findAll()") + 'Find data error:', err);
+            // console.error(debugLogheader("Databasehandler.findAll()") + 'Find data error:', err);
             throw err;
         } finally {
             await this.disconnect();
@@ -77,10 +77,10 @@ class DatabaseHandler {
         try {
             await this.connect();
             const result = await mongooseModel.create(queryObject);
-            console.log(debugLogheader("Databasehandler.insertOne()") + 'Data inserted successfully:', result);
+            // console.log(debugLogheader("Databasehandler.insertOne()") + 'Data inserted successfully:', result);
             return result;
         } catch (err) {
-            console.error(debugLogheader("Databasehandler.insertOne()") + 'Insert data error:', err);
+            // console.error(debugLogheader("Databasehandler.insertOne()") + 'Insert data error:', err);
             throw err;
         } finally {
             await this.disconnect();
@@ -88,8 +88,18 @@ class DatabaseHandler {
     }
 
     // 更新数据
-    async update(collection, query, updateData) {
+    async update(mongooseModel, queryObject, updateData) {
         // 更新数据的逻辑
+        try {
+            await this.connect(); // 连接数据库
+            const result = await mongooseModel.updateOne(queryObject, {$push: updateData}); 
+            return result;
+        } catch (err) {
+            console.error(debugLogheader("Databasehandler.update()") + 'Update data error:', err);
+            throw err;
+        } finally {
+            await this.disconnect(); // 断开连接
+        }
     }
 
     // 删除数据

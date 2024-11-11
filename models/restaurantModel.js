@@ -16,7 +16,12 @@ class RestaurantModel { // 定義一個名為 UserModel 的類別
                 type: [
                     {
                         itemName: { type: String, required: true },
-                        itemPrice: { type: Number, required: true }
+                        itemPrice: { type: Number, required: true },
+                        itemPicture: {
+                            filename: { type: String, required: true },
+                            path: { type: String, required: true },
+                            contentType: { type: String, required: true },
+                        }
                     }
                 ],
                 default: [] // 默認為空陣列
@@ -24,6 +29,12 @@ class RestaurantModel { // 定義一個名為 UserModel 的類別
             address: {
                 city: { type: String, required: true },
                 street: { type: String, required: true }
+            },
+            owner: {
+                type: {
+                    ownerUserID: { type: String, required: true },
+                    ownerEmail: { type: String, required: true }
+                }
             },
             createdAt: {
                 type: Date,
@@ -60,31 +71,41 @@ class RestaurantModel { // 定義一個名為 UserModel 的類別
         return result;
     }
 
-    async insertRestaurant(restaurantName, menuItems, address) {
-        console.log("Inserting restaurant with the following details:", {
-            restaurantName,
-            menuItems,
-            address
+    async findRestaurantByOwnerUserID(ownerUserID) {
+        let result = await this.db.findOne(this.Restaurant, { "owner.ownerUserID": ownerUserID }).catch(err => {
+            throw err;
         });
+        return result;
+    }
+
+    async insertRestaurant(restaurantName, menuItems, address, owner) {
         let result = await this.db.insertOne(this.Restaurant, {
             restaurantName: restaurantName,
             menuItems: menuItems || [],
-            address: address
+            address: address,
+            owner: owner
         }).catch(err => {
             throw err;
         });
         return result;
     }
 
-    async insertMenuItemByRestaurantNameAnd(restaurantName, itemName, itemPrice) {
-        let result = await this.db.updateOne(this.Restaurant, { restaurantName: restaurantName }, {
-            $push: {
-                menuItems: {
-                    itemName: itemName,
-                    itemPrice: itemPrice
+    async insertMenuItemByRestaurantName(restaurantName, itemName, itemPrice, itemPicture) {
+        const updateObject = {
+            menuItems: { // menuItems 為您要更新的數組字段
+                itemName: itemName,
+                itemPrice: itemPrice,
+                itemPicture: {
+                    filename: itemPicture.filename,
+                    path: itemPicture.filePath,
+                    contentType: itemPicture.contentType
                 }
             }
-        }).catch(err => {
+
+        };
+        const queryObject = { restaurantName: restaurantName };
+
+        let result = await this.db.update(this.Restaurant, queryObject, updateObject).catch(err => {
             throw err;
         });
         return result;
