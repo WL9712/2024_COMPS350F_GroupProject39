@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+</head>
+
+<body>
+    <a href="/"><h1>COMP S350F - Group Project 39 - Sign Up Page</h1></a>
+    <% if (error) { %>
+        <p style="color: red;" class="error-message">
+            <%= error %>
+        </p>
+        <% } else if (success) { %>
+            <p style="color: green;" class="success-message">
+                <%= success %>
+                    <% } %>
+                        <form action="/user/signup" method="POST" autocomplete="off" class="sign-up-form">
+
+                            <div class="input-wrap">
+                                <input type="text" name="userID" minlength="4" class="input-field" autocomplete="off"
+                                    required />
+
+                                <label>User ID</label>
+                            </div>
+
+                            <div class="input-wrap">
+                                <input type="email" name="userEmail" class="input-field" autocomplete="off" required />
+
+                                <label>Email</label>
+                            </div>
+
+                            <div class="input-wrap">
+                                <input type="password" name="userPassword" minlength="4" class="input-field"
+                                    autocomplete="off" required />
+
+                                <label>Password</label>
+                            </div>
+
+                            <select  name="userRole" required>
+                                <option value="customer">Customer</option>
+                                <option value="restaurant">Restaurant</option>
+                                <option value="delivery man">Delivery Man</option>
+                            </select>
+                            <input type="submit" value="Sign Up" class="sign-btn" />
+                        </form>
+</body>
+
+</html>

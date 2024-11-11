@@ -1,87 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../public/assets/index.css" />
-    <title>Web Design Mastery | Camp</title>
-  </head>
-  <body>
-    <nav>
-      <div class="nav__header">
-        <div class="nav__logo">
-          <a href="#">FoodDelivery.Com</a>
-        </div>
-        <div class="nav__menu__btn" id="menu-btn">
-          <i class="ri-menu-line"></i>
-        </div>
-      </div>
-      <ul class="nav__links" id="nav-links">
-        <li><a href="#">HOME</a></li>
-        <li><a href="#">ABOUT US</a></li>
-        <li><a href="#">CONTACT</a></li>
-      </ul>
-      <div class="nav__btns">
-        <button class="btn"><i class="ri-search-line"></i></button>
-        <button class="btn"><i class="ri-shopping-bag-line"></i></button>
-      </div>
-    </nav>
-    <div class="container">
-      <div class="container__left">
-        <h1>Resolve Your Food and Warmth Issues</h1>
-        <div class="container__btn">
-          <button onclick="window.location.href='/user/login'" class="btn">LOGIN NOW</button>
-        </div>
-      </div>
-      <div class="container__right">
-        <div class="images">
-          <img src="../public/image/tent-1.jpg" alt="tent-1" class="tent-1" />
-          <img src="../public/image/tent-2.jpg" alt="tent-2" class="tent-2" />
-        </div>
-        <div class="content">
-          <h4>12m2 | 2 beds</h4>
-          <h2>BASIC TENT</h2>
-          <h3>Your Camping Experience</h3>
-          <p>
-            Designed for those who appreciate the fundamental joys of camping,
-            our selection of basic tents offers comfort and reliability without
-            unnecessary frills.
-          </p>
-        </div>
-      </div>
-      <div class="location">
-        <span><i class="ri-map-pin-2-fill"></i></span>
-        OUR LOCATION
-      </div>
-      <div class="socials">
-        <span>
-          <a href="#"><i class="ri-facebook-fill"></i></a>
-        </span>
-        <span>
-          <a href="#"><i class="ri-instagram-line"></i></a>
-        </span>
-        <span>
-          <a href="#"><i class="ri-twitter-fill"></i></a>
-        </span>
-      </div>
-    </div>
-    <div>
-      <h1>COMP S350F - Group Project 39 - Main Page</h1>
-    <% if (userId) { %>
-        <p>Hello, <%= userId %>!</p>
-        <button onclick="window.location.href='/user/logout'">登出</button>
-        <button onclick="window.location.href='/restaurant/registerRestaurant'">菜單</button>
-    <% } else { %>
-        <p>Please login !</p>
-        <button onclick="window.location.href='/user/login'">登入</button>
-    <% } %>
-    </div>
+<html lang="zh-TW">
 
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="../public/js/index.js"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首頁</title>
+</head>
+
+<body>
+    <h1>COMP S350F - Group Project 39 - Main Page</h1>
+    <% if (user) { %>
+
+        <p>Hello, <%= user.userID %>! You are a <%= user.userRole%></p>
+
+        <button onclick="window.location.href='/user/logout'">Logout</button>
+
+        
+        <% if (user.userRole==='restaurant' ) { %>
+            <button onclick="window.location.href='/restaurant/registerRestaurant'">Register Restaurant</button>
+            <% } %>
+                <% } else { %>
+                    <p>Please login !</p>
+                    <button onclick="window.location.href='/user/login'">Login</button>
+                    <button onclick="window.location.href='/user/signup'">Sign up</button>
+                    
+                    <% } %>
+
+</body>
+
 </html>

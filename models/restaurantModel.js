@@ -14,9 +14,9 @@ class RestaurantModel { // 定義一個名為 UserModel 的類別
             },
             menuItems: { // 陣列本身是可選的，可以保持空
                 type: [
-                    { 
-                        itemName: { type: String, required: true, unique: true }, 
-                        itemPrice: { type: Number, required: true } 
+                    {
+                        itemName: { type: String, required: true },
+                        itemPrice: { type: Number, required: true }
                     }
                 ],
                 default: [] // 默認為空陣列
@@ -46,69 +46,59 @@ class RestaurantModel { // 定義一個名為 UserModel 的類別
 
     // 靜態方法，用來查詢所有用戶
     async findAllRestaurant() {
-        try {
-            let result = await this.db.findAll(this.Restaurant);
-            return result;
-        } catch (err) {
+        let result = await this.db.findAll(this.Restaurant).catch(err => {
             throw err;
-        }
+        });
+        return result;
     }
 
     // 靜態方法，根據用戶名稱查詢單個用戶
     async findRestaurantByRestaurantName(restaurantName) {
-        try {
-            let result = await this.db.findOne(this.Restaurant, { restaurantName: restaurantName });
-            return result;
-        } catch (err) {
+        let result = await this.db.findOne(this.Restaurant, { restaurantName: restaurantName }).catch(err => {
             throw err;
-        }
+        });
+        return result;
     }
 
     async insertRestaurant(restaurantName, menuItems, address) {
-        try {
-            console.log("Inserting restaurant with the following details:", {
-                restaurantName,
-                menuItems,
-                address
-            });
-            let result = await this.db.insertOne(this.Restaurant, {
-                restaurantName: restaurantName,
-                menuItems: menuItems || [],
-                address: address
-            });
-            return result;
-        } catch (err) {
+        console.log("Inserting restaurant with the following details:", {
+            restaurantName,
+            menuItems,
+            address
+        });
+        let result = await this.db.insertOne(this.Restaurant, {
+            restaurantName: restaurantName,
+            menuItems: menuItems || [],
+            address: address
+        }).catch(err => {
             throw err;
-        }
+        });
+        return result;
     }
 
     async insertMenuItemByRestaurantNameAnd(restaurantName, itemName, itemPrice) {
-        try {
-            let result = await this.db.updateOne(this.Restaurant, { restaurantName: restaurantName }, {
-                $push: {
-                    menuItems: {
-                        itemName: itemName,
-                        itemPrice: itemPrice
-                    }
+        let result = await this.db.updateOne(this.Restaurant, { restaurantName: restaurantName }, {
+            $push: {
+                menuItems: {
+                    itemName: itemName,
+                    itemPrice: itemPrice
                 }
-            });
-            return result;
-        } catch (err) {
+            }
+        }).catch(err => {
             throw err;
-        }   
+        });
+        return result;
     }
 
     async updateMenuItemByRestaurantName(restaurantName, itemName, itemPrice) {
-        try {
-            let result = await this.db.updateOne(this.Restaurant, { restaurantName: restaurantName, "menuItems.itemName": itemName }, {
-                $set: {
-                    "menuItems.$.itemName": itemPrice    
-                }
-            });
-            return result;
-        } catch (err) {
+        let result = await this.db.updateOne(this.Restaurant, { restaurantName: restaurantName, "menuItems.itemName": itemName }, {
+            $set: {
+                "menuItems.$.itemName": itemPrice
+            }
+        }).catch(err => {
             throw err;
-        }   
+        });
+        return result;
     }
 }
 

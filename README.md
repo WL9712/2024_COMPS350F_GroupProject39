@@ -1,5 +1,5 @@
 # 2024_COMPS350F_GroupProject39
-基於 MVC 架構的網絡應用程式：Food Tracking and Ordering
+Based on the MVC architecture web applications：Food Tracking and Ordering
 
 # How to run the project?
 
@@ -49,15 +49,32 @@ If you have scripts defined in your package.json, you can run them using:
 
 ![serverRunning](/public/image/serverRunning.png)
 
-## 文件夾結構
+## Folder Structure
 ![folderStructure](/public/image/folderStructure.png "folderStructure")
 
 
-## 已完成的功能
-- 登入/登出功能
-- 一般用戶註冊功能 (數據庫資料冲突驗證未完成)
+## All Functions
+- Login & Sign up (Finish Logic)
+
+### Customor
+- Browse Menu
+- Place Order
+- Track Order
+- Rate Order
+- Make Payment
+
+### Restaurant
+- Manage Menu
+- Accept Order
+- Update Order Status
 
 
-## 已完成的UI介面
-- 登入&註冊畫面 (暫定初稿，參考：https://www.youtube.com/watch?v=fC3qLUWf_Lk)
-    ![loginUI](/public/image/loginUI.png "loginUI")
+### Delivery Man
+- Accept Delivery Request
+- Deliver Order
+- Update Delivery Status
+
+### Admin
+- Manage Users
+- View Analytics
+- Handle Complaints

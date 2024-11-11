@@ -6,7 +6,7 @@ class UserModel { // 定義一個名為 UserModel 的類別
     constructor() { // 構造函數，當創建 UserModel 的實例時會自動調用
         // 定義一個用戶的資料結構，包含用戶名和用戶密碼
         this.userSchema = new mongoose.Schema({
-            userID: { type: String, required: true }, // userID 必须是字符串类型且必填
+            userID: { type: String, required: true, unique: true }, // userID 必须是字符串类型且必填
             userPassword: { type: String, required: true },
             userEmail: { type: String, required: true },
             userRole: { type: String, required: true },
@@ -32,36 +32,30 @@ class UserModel { // 定義一個名為 UserModel 的類別
 
         this.collectionName = 'users'; // 定義集合名稱
         this.db = new DatabaseHandler(); // 創建一個新的 DatabaseHandler 實例來處理資料庫操作
-    }    
-    
+    }
+
 
     async findAllUser() {
-        try {
-            let result = await this.db.findAll(this.User);
-            return result; // 返回查詢結果
-        } catch (err) {
+        let result = await this.db.findAll(this.User).catch(err => {
             throw err;
-        }
+        });
+        return result;
     }
 
     async findUserByuserID(userID) {
-        try {
-            let result = await this.db.findOne(this.User, { userID: userID });
-            return result; // 返回查詢結果  
-        } catch (err) {
+        let result = await this.db.findOne(this.User, { userID: userID }).catch(err => {
             throw err;
-        }
+        });
+        return result;
     }
 
     async insertUser(userID, userPassword, userEmail, userRole) {
-        try {
-            let result = await this.db.insertOne(this.User, { 
-                userID: userID, userPassword: userPassword, userEmail: userEmail, userRole: userRole 
-            });
-            return result; // 返回插入結果
-        } catch (err) {
-            throw err;
-        }
+        return await this.db.insertOne(this.User, {
+            userID: userID,
+            userPassword: userPassword,
+            userEmail: userEmail,
+            userRole: userRole
+        });
     }
 }
 

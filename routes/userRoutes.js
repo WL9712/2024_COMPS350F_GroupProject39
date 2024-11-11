@@ -10,6 +10,8 @@ router.get('/login', (req, res) => userController.renderLogin(req, res));
 router.post('/login', (req, res) => userController.login(req, res));
 
 
+router.get('/signup', (req, res) => userController.renderSignup(req, res));
+
 router.post('/signup', (req, res) => userController.signup(req, res));
 
 // 登出功能路由 (通過 index.ejs 中 button 調用)

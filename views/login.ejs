@@ -11,157 +11,41 @@
   <link href="../public/image/logo.png" rel="shortcut icon" />
   <!-- 設置頁面標題 -->
   <title>Sign in & Sign up Form</title>
-  <!-- 引入CSS樣式文件 -->
-  <link rel="stylesheet" href="../public/assets/login.css" />
-  
 </head>
 
 <body>
-  <main>
 
-     
-    <div class="box">
+  <a href="/"><h1>COMP S350F - Group Project 39 - Login Page</h1></a>
+  <form action="/user/login" method="POST" autocomplete="off" class="sign-in-form">
 
-      <div class="inner-box">
-
-        <div class="forms-wrap">
-
-          <form action="/user/login" method="POST" autocomplete="off" class="sign-in-form">
-            <div class="logo">
-
-              <img src="../public/image/logo.png" alt="easyclass" />
-
-              <h4>FoodDelivery.Com</h4>
-            </div>
-
-            <div class="heading">
-
-              <h2>Welcome Back</h2>
-              <h6>Not registred yet?</h6>
-
-              <a href="#" class="toggle">Sign up</a>
-            </div>
-
-            <div class="actual-form">
-              <% if (error) { %>
-                <p style="color: red;" class="error-message">
-                  <%= error %>
-                </p>
-                <% } else if (success) { %>
-                  <p style="color: green;" class="success-message">
-                    <%= success %>
-                      <% } %>
-
-                        <div class="input-wrap">
-                          <input type="text" id="userID" name="userID" minlength="4" class="input-field"
-                            autocomplete="off" required />
-
-                          <label>User ID</label>
-                        </div>
-
-                        <div class="input-wrap">
-                          <input type="password" id="password" name="userPassword" minlength="4" class="input-field"
-                            autocomplete="off" required />
-
-                          <label>Password</label>
-                        </div>
-
-
-                        <input type="submit" value="Sign In" class="sign-btn" />
-
-                        <p class="text">
-
-                          Forgotten your password or you login datails?
-
-                          <a href="#">Get help</a> signing in
-                        </p>
-            </div>
-          </form>
-
-
-          <form action="/user/signup" method="POST" autocomplete="off" class="sign-up-form">
-            <div class="logo">
-
-              <img src="../public/image/logo.png" alt="easyclass" />
-
-              <h4>FoodDelivery.Com</h4>
-            </div>
-
-            <div class="heading">
-
-              <h2>Get Started</h2>
-              <h6>Already have an account?</h6>
-
-              <a href="#" class="toggle">Login</a>
-            </div>
-
-            <div class="actual-form">
+  <% if (error) { %>
+      <p style="color: red;" class="error-message">
+        <%= error %>
+      </p>
+      <% } else if (success) { %>
+        <p style="color: green;" class="success-message">
+          <%= success %>
+            <% } %>
 
               <div class="input-wrap">
-                <input type="text" name="userID" minlength="4" class="input-field" autocomplete="off" required />
+                <input type="text" id="userID" name="userID" minlength="4" class="input-field" autocomplete="off"
+                  required />
 
                 <label>User ID</label>
               </div>
 
               <div class="input-wrap">
-                <input type="email" name="userEmail" class="input-field" autocomplete="off" required />
-
-                <label>Email</label>
-              </div>
-
-              <div class="input-wrap">
-                <input type="password" name="userPassword" minlength="4" class="input-field" autocomplete="off" required />
+                <input type="password" id="password" name="userPassword" minlength="4" class="input-field"
+                  autocomplete="off" required />
 
                 <label>Password</label>
               </div>
 
 
-              <input type="submit" value="Sign Up" class="sign-btn" />
+              <input type="submit" value="Login" class="sign-btn" />
 
-              <p class="text">
+  </form>
 
-                By signing up, I agree to the
-                <a href="#">Terms of Services</a> and
-                <a href="#">Privacy Policy</a>
-              </p>
-            </div>
-          </form>
-        </div>
-
-        <div class="carousel">
-
-          <div class="images-wrapper">
-
-            <img src="../public/image/image1.png" class="image img-1 show" alt="" />
-            <img src="../public/image/image2.png" class="image img-2" alt="" />
-            <img src="../public/image/image3.png" class="image img-3" alt="" />
-          </div>
-
-          <div class="text-slider">
-
-            <div class="text-wrap">
-              <div class="text-group">
-
-                <h2>At any time, anywhere</h2>
-                <h2>On-demand delivery</h2>
-                <h2>Inconceivable delivery efficiency</h2>
-              </div>
-            </div>
-
-            <div class="bullets">
-
-              <span class="active" data-value="1"></span>
-              <span data-value="2"></span>
-              <span data-value="3"></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- 引入JavaScript文件 -->
-  <script src="../public/js/login.js"></script>
 </body>
 
 </html>

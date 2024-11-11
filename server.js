@@ -39,7 +39,7 @@ app.use('/restaurant', restaurantRoutes); // 餐廳功能路由
 
 // 根路由 
 app.get('/', async (req, res) => {
-    res.render('index', { userId: req.session.userId });
+    res.render('index', { user: req.session.user });
 });
 
 // ------------------------
