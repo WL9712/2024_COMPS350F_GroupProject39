@@ -34,7 +34,7 @@ Now that you have npm installed, you can run npm commands. Here are some common 
 
 \- Install a package: To install a package (e.g., express), run:
 
-    npm install express body-parser cookie-session ejs mongoose 
+    npm install express body-parser cookie-session ejs mongoose multer
 
 
 ## 4. Running Project
