@@ -28,13 +28,13 @@ After installation, you can verify that Node.js and npm are installed correctly 
 
 You should see version numbers for both Node.js and npm.
 
-## 3. Running npm Commands
+## 3. Running npm Commands (If you have already completed the above steps before, please restart from this step.)
 Now that you have npm installed, you can run npm commands. Here are some common commands:
 
 
 \- Install a package: To install a package (e.g., express), run:
 
-    npm install express body-parser cookie-session ejs mongoose multer
+    npm install express body-parser cookie-session ejs mongoose multer gridfs-stream method-override
 
 
 ## 4. Running Project
