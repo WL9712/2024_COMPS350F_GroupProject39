@@ -11,7 +11,6 @@ class AdminController {
             usersList = await userModel.findAllUser();
             usersList = usersList.filter(user => user.userRole !== admin.userRole);
         } catch (err) {
-            console.error(err);
             error = 'An error occurred while fetching user data';
         }
 

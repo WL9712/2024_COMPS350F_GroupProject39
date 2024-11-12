@@ -5,19 +5,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Browse Menus</title>
+    <style>
+        table {
+            width: 100%;
+            margin: 0 auto; /* 表格居中 */
+            text-align: center; 
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px; /* 增加表格内边距，增强可读性 */
+            border: 1px solid #ddd; /* 表格边框样式 */
+        }
+        form {
+            display: inline;
+        }
+    </style>
 </head>
 
 <body>
     <a href="/"><h1>COMP S350F - Group Project 39 - Browse Menus Page</h1></a>
     <% if (user) { %>
-
-        
-
+        <% for (let i = 0; i < restaurantsList.length; i++) { %> <!-- 使用 let 声明循环变量 -->
+            <h2><%= restaurantsList[i].restaurantName %></h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Menu Name</th>
+                        <th>Menu Price</th>
+                        <th>Menu Image</th>
+                        <th>Order</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (Array.isArray(restaurantsList[i].menuItems) && restaurantsList[i].menuItems.length > 0) { %>
+                        <% for (let j = 0; j < restaurantsList[i].menuItems.length; j++) { %> <!-- 使用 let 声明内层循环变量 -->
+                            <tr>
+                                <td><%= restaurantsList[i].menuItems[j].itemName %></td>
+                                <td><%= restaurantsList[i].menuItems[j].itemPrice %></td>
+                                <td><img src="<%= restaurantsList[i].menuItems[j].itemImage %>" alt="menu image" width="100" height="100"></td>
+                                <td>
+                                    <form action="/order" method="POST">
+                                        <input type="hidden" name="itemName" value="<%= restaurantsList[i].menuItems[j].itemName %>"">
+                                        <input type="hidden" name="itemPrice" value="<%= restaurantsList[i].menuItems[j].itemPrice %>">
+                                        <input type="hidden" name="itemImage" value="<%= restaurantsList[i].menuItems[j].itemImage %>">
+                                        <input type="submit" value="Order">
+                                    </form>
+                                </td>
+                            </tr>
+                        <% } %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="4">No menus found.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>     
+        <% } %>
     <% } else { %>
         <p>Please login!</p>
         <button onclick="window.location.href='/user/login'">Login</button>
         <button onclick="window.location.href='/user/signup'">Sign up</button>
     <% } %>
 </body>
-
 </html>
