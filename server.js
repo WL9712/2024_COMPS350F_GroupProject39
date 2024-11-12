@@ -7,7 +7,9 @@ require('./lib/debugLogheader');
 
 // 導入路由
 const userRoutes = require('./routes/userRoutes');
+const customerRoutes = require('./routes/customerRouters');
 const restaurantRoutes = require('./routes/restaurantRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 // 創建依賴實體
 const app = express();
@@ -36,6 +38,10 @@ app.use('/public', express.static('public'));
 app.use('/user', userRoutes); // 登入功能路由
 
 app.use('/restaurant', restaurantRoutes); // 餐廳功能路由
+
+app.use('/admin', adminRoutes); // 管理員功能路由
+
+app.use('/customer', customerRoutes); // 顧客功能路由
 
 // 根路由 
 app.get('/', async (req, res) => {

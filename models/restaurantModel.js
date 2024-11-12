@@ -104,8 +104,8 @@ class RestaurantModel { // 定義一個名為 UserModel 的類別
 
         };
         const queryObject = { restaurantName: restaurantName };
-
-        let result = await this.db.update(this.Restaurant, queryObject, updateObject).catch(err => {
+        const updateMode =  "push" ;
+        let result = await this.db.update(this.Restaurant, queryObject, updateMode, updateObject).catch(err => {
             throw err;
         });
         return result;

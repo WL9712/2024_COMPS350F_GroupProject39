@@ -88,11 +88,16 @@ class DatabaseHandler {
     }
 
     // 更新数据
-    async update(mongooseModel, queryObject, updateData) {
+    async update(mongooseModel, queryObject, updateMode, updateData) {
         // 更新数据的逻辑
         try {
             await this.connect(); // 连接数据库
-            const result = await mongooseModel.updateOne(queryObject, {$push: updateData}); 
+            let result = null;
+            if (updateMode === "push") {
+                result = await mongooseModel.updateOne(queryObject, { $push: updateData });
+            } else if (updateData === "set") {
+                result = await mongooseModel.updateOne(queryObject, { $set: updateData });
+            }
             return result;
         } catch (err) {
             console.error(debugLogheader("Databasehandler.update()") + 'Update data error:', err);
@@ -103,10 +108,26 @@ class DatabaseHandler {
     }
 
     // 删除数据
-    async delete(collection, query) {
-        // 删除满足查询条件的数据
+    async delete(mongooseModel, queryObject, deleteNum) {
+        try {
+            await this.connect();
+            let result = null;
+            if (deleteNum === "many") {
+                result = await mongooseModel.deleteMany(queryObject);
+            } else if (deleteNum === "one") {
+                result = await mongooseModel.deleteOne(queryObject);
+            }
+            console.log(result);
+            // console.log(debugLogheader("Databasehandler.delete()") + 'Data deleted successfully:', result);
+            return result;
+        } catch (err) {
+            // console.error(debugLogheader("Databasehandler.delete()") + 'Delete data error:', err);
+            throw err;
+        } finally {
+            await this.disconnect
+        }
     }
-
+    
     // 统计数目
     async count(collection, query) {
         // 返回满足查询条件的数据数量

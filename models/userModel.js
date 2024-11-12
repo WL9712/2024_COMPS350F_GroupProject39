@@ -42,7 +42,7 @@ class UserModel { // 定義一個名為 UserModel 的類別
         return result;
     }
 
-    async findUserByuserID(userID) {
+    async findUserByUserID(userID) {
         let result = await this.db.findOne(this.User, { userID: userID }).catch(err => {
             throw err;
         });
@@ -57,6 +57,25 @@ class UserModel { // 定義一個名為 UserModel 的類別
             userRole: userRole
         });
     }
+
+    async deleteUserByUserID(userID) {
+        let result = await this.db.delete(this.User, { userID: userID }, "one").catch(err => {
+            throw err;
+        });
+        console.log(result);
+        return result;
+    }
+
+    async authenticate(userID, userPassword) {
+        let user = new UserModel();
+        let result = await user.findUserByUserID(userID);
+        if (result && result.userPassword === userPassword) {
+            return { isSuccess: true, user: result };
+        }
+        return { isSuccess: false, user: result };
+    }   
+
+
 }
 
 // 將 UserModel 類別導出，以便其他模組可以使用

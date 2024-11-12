@@ -49,17 +49,19 @@ If you have scripts defined in your package.json, you can run them using:
 
 
 ## All Functions
-- Login & Sign up (Finish)
+- Login & Sign up (Finish) 
 
 ### Customor
-- Browse Menu
+- Browse Menu (Processing)
 - Place Order
 - Track Order
 - Rate Order
 - Make Payment
 
 ### Restaurant
-- Manage Menu (Finish Insert Menu)
+- Manage Menu Page (Processing)
+    - Insert Meun (Finish)
+    - Delete Menu
 - Accept Order
 - Update Order Status
 
@@ -70,6 +72,7 @@ If you have scripts defined in your package.json, you can run them using:
 - Update Delivery Status
 
 ### Admin
-- Manage Users
+- Manage Users Page (Processing)
+    - Delete User (Finish)
 - View Analytics
 - Handle Complaints

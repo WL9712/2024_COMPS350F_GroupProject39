@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Menus</title>
+</head>
+
+<body>
+    <a href="/"><h1>COMP S350F - Group Project 39 - Browse Menus Page</h1></a>
+    <% if (user) { %>
+
+        
+
+    <% } else { %>
+        <p>Please login!</p>
+        <button onclick="window.location.href='/user/login'">Login</button>
+        <button onclick="window.location.href='/user/signup'">Sign up</button>
+    <% } %>
+</body>
+
+</html>

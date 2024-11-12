@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Manage Page</title>
+    <style>
+        table {
+            width: 100%;
+            margin: 0 auto; /* 表格居中 */
+            text-align: center; 
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px; /* 增加表格内边距，增强可读性 */
+            border: 1px solid #ddd; /* 表格边框样式 */
+        }
+        form {
+            display: inline;
+        }
+    </style>
+</head>
+<body>
+    <a href="/"><h1>COMP S350F - Group Project 39 - User Manage Page</h1></a>
+    <% if (admin && admin.userRole === 'admin') { %>
+        <p>Hello, <%= admin.userID %>! You are a <%= admin.userRole %>.</p>
+        <% if (success) { %>
+            <p style="color: green;"><%= success %></p>
+        <% } else if (error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } %>
+        <table border="1" >
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>User Role</th>
+                    <th>Operation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (Array.isArray(usersList) && usersList.length > 0) { %>       
+                    <% for (let i = 0; i < usersList.length; i++) { %>
+                    <tr>
+                        <td><%= usersList[i].userID %></td>
+                        <td><%= usersList[i].userRole %></td>
+                        <td>
+                            <form action="/admin/editUser" method="PUT">
+                                <input type="hidden" name="userID" value="<%= usersList[i].userID %>">
+                                <input type="submit" value="Edit User">
+                            </form>
+                            <form action="/admin/deleteUser" method="POST">
+                                <input type="hidden" name="userID" value="<%= usersList[i].userID %>">
+                                <input type="submit" value="Delete User">
+                                <input type="hidden" name="_method" value="DELETE">
+                            </form> 
+                        </td>
+                    </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <td colspan="3">No users found.</td>
+                    </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <script>
+            window.location.href = '/';
+        </script>
+    <% } %>
+</body>
+
+</html>

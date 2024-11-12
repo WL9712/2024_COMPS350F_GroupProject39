@@ -23,18 +23,17 @@ class UserController {
         const { userID, userPassword } = req.body;
         const userModel = new UserModel();
         try {
-            const user = await userModel.findUserByuserID(userID);
-            // console.log(user);
-            if (!user || user.userPassword !== userPassword) {
+            const result = await userModel.authenticate(userID, userPassword);
+            console.log(result.isSuccess);
+            if (result.isSuccess) {
+                // 登入成功，設置會話
+                req.session.user = result.user; // 使用會話
+                res.redirect('/'); // 成功後重定向到首頁
+            } else {
                 // 登入失敗，渲染相同的登入頁面並顯示錯誤消息
                 return this.renderWithDefaults(res, 'login', { error: 'Invalid user account or password!' });
             }
-
-            // 登入成功，設置會話
-            req.session.user = user; // 使用會話
-            res.redirect('/'); // 成功後重定向到首頁
         } catch (err) {
-            // console.error(debugLogheader("UserController.login()") + err);
             this.renderWithDefaults(res, 'login', { error: 'An error occurred!' });
         }
     }
@@ -53,17 +52,11 @@ class UserController {
     async signup(req, res) {
         const { userID, userPassword, userEmail, userRole } = req.body;
         const userModel = new UserModel();
-        
+
         try {
-            // 嘗試插入用戶
             const result = await userModel.insertUser(userID, userPassword, userEmail, userRole);
-            // 如果插入成功，重定向到登入頁面
             this.renderWithDefaults(res, 'login', { success: 'User account created successfully!' });
         } catch (err) {
-            // 錯誤處理
-            // console.error(debugLogheader("UserController.signup()") + err.code);
-            
-            // 根據錯誤代碼進行不同的處理
             if (err.code === 11000) { // 重複鍵錯誤
                 this.renderWithDefaults(res, 'signup', { error: 'User ID already exists!' });
             } else {
@@ -71,7 +64,7 @@ class UserController {
             }
         }
     }
-    
+
 }
 
 module.exports = new UserController();

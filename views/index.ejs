@@ -4,29 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>首頁</title>
+    <title>Index</title>
 </head>
 
 <body>
     <h1>COMP S350F - Group Project 39 - Main Page</h1>
     <% if (user) { %>
-
-        <p>Hello, <%= user.userID %>! You are a <%= user.userRole%></p>
-
+        <p>Hello, <%= user.userID %>! You are a <%= user.userRole %>.</p>
         <button onclick="window.location.href='/user/logout'">Logout</button>
 
-        
-        <% if (user.userRole==='restaurant' ) { %>
+        <% if (user.userRole === 'customer') { %>
+            <button onclick="window.location.href='/customer/browseMenu'">Browes Menu</button>
+        <% } else if (user.userRole === 'restaurant') { %>
             <button onclick="window.location.href='/restaurant/registerRestaurant'">Register Restaurant</button>
-            <button onclick="window.location.href='/restaurant/insertMenu'">Insert Menut</button>
-            <% } %>
-                <% } else { %>
-                    <p>Please login !</p>
-                    <button onclick="window.location.href='/user/login'">Login</button>
-                    <button onclick="window.location.href='/user/signup'">Sign up</button>
-                    
-                    <% } %>
+            <button onclick="window.location.href='/restaurant/insertMenu'">Insert Menu</button>
+        <% } else if (user.userRole === 'admin') { %>
+            <button onclick="window.location.href='/admin/userManage'">User Manage</button>
+        <% } %>
 
+    <% } else { %>
+        <p>Please login!</p>
+        <button onclick="window.location.href='/user/login'">Login</button>
+        <button onclick="window.location.href='/user/signup'">Sign up</button>
+    <% } %>
 </body>
 
 </html>

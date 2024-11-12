@@ -8,14 +8,11 @@ class RestaurantController {
             // console.error(debugLogheader("RestaurantController.renderWithDefaults()") + err);
             return res.render(view, { result: 'An error occurred!' });
         });
-
         const defaults = {
             error: undefined,
             success: undefined,
             restaurantList: restaurantList,
         };
-
-        // 合并默认值和传入的选项
         const renderOptions = { ...defaults, ...options };
         res.render(view, renderOptions);
     }
@@ -31,10 +28,8 @@ class RestaurantController {
         const restaurantModel = new RestaurantModel();
         try {
             const result = await restaurantModel.insertRestaurant(restaurantName, null, { city: restaurantCity, street: restaurantStreet }, { ownerUserID: req.session.user.userID, ownerEmail: req.session.user.userEmail });
-            // console.log(debugLogheader("RestaurantController.registerRestaurant()") + result);
             await this.renderWithDefaults(res, 'registerRestaurant', { success: "success to register" });
         } catch (err) {
-            // console.error(debugLogheader("RestaurantController.registerRestaurant()") + err);
             await this.renderWithDefaults(res, 'registerRestaurant', { error: 'An error occurred!' });
         }
     }
@@ -44,23 +39,18 @@ class RestaurantController {
     }
 
     async insertMenu(req, res) {
-
         const { restaurantName, menuItemName, menuItemPrice } = req.body;
-        // 檢查是否有上傳檔案
         if (!req.file) {
             return this.renderWithDefaults(res, 'insertMenu', { error: 'File upload is required!' });
         }
-
         const filename = req.file.filename,
             contentType = req.file.mimetype,
             filePath = req.file.path;
-            
         const restaurantModel = new RestaurantModel();
         try {
             const result = await restaurantModel.insertMenuItemByRestaurantName(restaurantName, menuItemName, menuItemPrice, { filename, filePath, contentType });
             await this.renderWithDefaults(res, 'insertMenu', { success: 'Insert success' });
         } catch (err) {
-            //console.error(debugLogheader("RestaurantController.insertMenu()") + err);
             await this.renderWithDefaults(res, 'insertMenu', { error: 'An error occurred!' });
         }
     }
