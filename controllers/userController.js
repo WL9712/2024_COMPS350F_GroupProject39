@@ -24,10 +24,10 @@ class UserController {
         const userModel = new UserModel();
         try {
             const result = await userModel.authenticate(userID, userPassword);
-            console.log(result.isSuccess);
             if (result.isSuccess) {
                 // 登入成功，設置會話
                 req.session.user = result.user; // 使用會話
+                req.session.cart = [];
                 res.redirect('/'); // 成功後重定向到首頁
             } else {
                 // 登入失敗，渲染相同的登入頁面並顯示錯誤消息
@@ -58,7 +58,11 @@ class UserController {
             this.renderWithDefaults(res, 'login', { success: 'User account created successfully!' });
         } catch (err) {
             if (err.code === 11000) { // 重複鍵錯誤
-                this.renderWithDefaults(res, 'signup', { error: 'User ID already exists!' });
+                if ('userID' in err.errorResponse.keyPattern) {
+                    this.renderWithDefaults(res, 'signup', { error: 'User ID already exists!' });
+                } else if ('userEmail' in err.errorResponse.keyPattern) {
+                    this.renderWithDefaults(res, 'signup', { error: 'User email already exists!' });
+                }
             } else {
                 this.renderWithDefaults(res, 'signup', { error: 'An error occurred!' });
             }

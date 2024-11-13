@@ -23,6 +23,7 @@ app.set('view engine', 'ejs');
 
 // 設置中間件
 app.use(bodyParser.urlencoded({ extended: true })); // 解析 url 編碼格式請求體
+app.use(bodyParser.json());
 app.use(session({ // 設置會話規則
     name: 'session',
     secret: 'COMPS350F_GROUPPROJECT39',

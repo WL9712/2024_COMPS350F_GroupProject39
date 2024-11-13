@@ -7,28 +7,49 @@
 </head>
 <body>
     <a href="/"><h1>COMP S350F - Group Project 39 - Insert Menu Page</h1></a>
-    <% if (error) { %>
-        <p style="color: red;"><%= error %></p>
-    <% } else if (success) { %> 
-        <p style="color: green;"><%= success %></p>
-    <% } %>
 
-    <form action="/restaurant/insertMenu" method="POST" enctype="multipart/form-data">
-        Restaurant Name:
-        <select name="restaurantName" id="restaurantName">
-            <% for (let i = 0; i < restaurantList.length; i++) { %>
-                <option value="<%= restaurantList[i].restaurantName %>">
-                    <%= restaurantList[i].restaurantName %>
-                </option>
-            <% } %>
-        </select><br/>
-        Menu Name:
-        <input type="text" name="menuItemName" placeholder="menuName"><br/>
-        Menu Price:
-        <input type="number" name="menuItemPrice" placeholder="menuPrice"><br/>
-        Menu Image:
-        <input type="file"  accept="image/*"  name="menuImage"><br/>
-        <input type="submit" value="Insert Menu">
-    </form>
+    <% if (restaurantList.length === 0) { %>
+        <% if (error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% }
+    } else { %>
+        <% if (error) { %>
+            <p style="color: red;"><%= error %></p>
+        <% } else if (success) { %> 
+            <p style="color: green;"><%= success %></p>
+        <% } %>
+        <form action="/restaurant/insertMenu" method="POST" enctype="multipart/form-data">
+
+            Restaurant Name:<br/>
+            <select name="restaurantName" id="restaurantName">
+                <% for (let i = 0; i < restaurantList.length; i++) { %>
+                    <option value="<%= restaurantList[i].restaurantName %>">
+                        <%= restaurantList[i].restaurantName %>
+                    </option>
+                <% } %>
+            </select><br/><br/>
+
+            Menu Name:<br/>
+            <input type="text" name="menuItemName" placeholder="Menu Name" required><br/><br/>
+
+            Menu Price:<br/>
+            <input type="number" name="menuItemPrice" placeholder="Menu Price" required><br/><br/>
+            <label for="menuItemDescription">Menu Description:</label><br/>
+            <textarea name="menuItemDescription" placeholder="Enter Menu Description" rows="4" cols="50" required></textarea><br/><br/>
+
+            Menu Category:<br/>
+            <select name="menuItemCategory" required>
+                <option value="Appetizer">Appetizer</option>
+                <option value="Main Course">Main Course</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Beverage">Beverage</option>
+            </select><br/><br/>
+
+            Menu Image:<br/>
+            <input type="file"  accept="image/*"  name="menuImage" required><br/><br/>
+            
+            <input type="submit" value="Insert Menu">
+        </form>
+    <% } %>
 </body>
 </html>

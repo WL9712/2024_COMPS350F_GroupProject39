@@ -6,17 +6,27 @@ class RestaurantModel { // 定義一個名為 UserModel 的類別
     constructor() { // 構造函數，當創建 UserModel 的實例時會自動調用
         // 定義一個用戶的資料結構，包含用戶名和用戶密碼
         this.restaurantSchema = new mongoose.Schema({
+            restaurantID: { type: mongoose.Schema.Types.ObjectId, 
+                default: () => new mongoose.Types.ObjectId(),
+                required: true, 
+                unique: true },
             restaurantName: {
                 type: String,
                 required: true,
-                index: true,
-                unique: true
+                index: true
             },
             menuItems: { // 陣列本身是可選的，可以保持空
                 type: [
-                    {
+                    {   
+                        itemID: { 
+                            type: mongoose.Schema.Types.ObjectId,
+                            default: () => new mongoose.Types.ObjectId(),
+                            unique: true
+                        },
                         itemName: { type: String, required: true },
                         itemPrice: { type: Number, required: true },
+                        itemDescription: { type: String, required: false },
+                        itemCategory: { type: String, required: true },
                         itemPicture: {
                             filename: { type: String, required: true },
                             path: { type: String, required: true },
@@ -68,11 +78,12 @@ class RestaurantModel { // 定義一個名為 UserModel 的類別
         let result = await this.db.findOne(this.Restaurant, { restaurantName: restaurantName }).catch(err => {
             throw err;
         });
+        console.log(result);
         return result;
     }
 
-    async findRestaurantByOwnerUserID(ownerUserID) {
-        let result = await this.db.findOne(this.Restaurant, { "owner.ownerUserID": ownerUserID }).catch(err => {
+    async findAllRestaurantByOwnerUserID(ownerUserID) {
+        let result = await this.db.findMany(this.Restaurant, { "owner.ownerUserID": ownerUserID }).catch(err => {
             throw err;
         });
         return result;
@@ -90,11 +101,13 @@ class RestaurantModel { // 定義一個名為 UserModel 的類別
         return result;
     }
 
-    async insertMenuItemByRestaurantName(restaurantName, itemName, itemPrice, itemPicture) {
+    async insertMenuItemByRestaurantName(restaurantName, itemName, itemPrice, itemDescription, itemCategory, itemPicture) {
         const updateObject = {
             menuItems: { // menuItems 為您要更新的數組字段
                 itemName: itemName,
                 itemPrice: itemPrice,
+                itemDescription: itemDescription,
+                itemCategory: itemCategory,
                 itemPicture: {
                     filename: itemPicture.filename,
                     path: itemPicture.filePath,

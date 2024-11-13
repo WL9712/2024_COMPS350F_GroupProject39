@@ -100,7 +100,6 @@ class DatabaseHandler {
             }
             return result;
         } catch (err) {
-            console.error(debugLogheader("Databasehandler.update()") + 'Update data error:', err);
             throw err;
         } finally {
             await this.disconnect(); // 断开连接
@@ -117,7 +116,6 @@ class DatabaseHandler {
             } else if (deleteNum === "one") {
                 result = await mongooseModel.deleteOne(queryObject);
             }
-            console.log(result);
             // console.log(debugLogheader("Databasehandler.delete()") + 'Data deleted successfully:', result);
             return result;
         } catch (err) {

@@ -15,36 +15,41 @@
 
 <body>
 
-  <a href="/"><h1>COMP S350F - Group Project 39 - Login Page</h1></a>
+  <a href="/">
+    <h1>COMP S350F - Group Project 39 - Login Page</h1>
+  </a>
   <form action="/user/login" method="POST" autocomplete="off" class="sign-in-form">
 
-  <% if (error) { %>
+    <% if (error) { %>
       <p style="color: red;" class="error-message">
         <%= error %>
       </p>
       <% } else if (success) { %>
         <p style="color: green;" class="success-message">
           <%= success %>
-            <% } %>
+        </p>
+        <% } %>
 
-              <div class="input-wrap">
-                <label>User ID</label>
-                <input type="text" id="userID" name="userID" minlength="4" class="input-field" autocomplete="off"
-                  required />
+          <div class="input-wrap">
+            <label>User ID</label>
+            <input type="text" id="userID" name="userID" minlength="4" class="input-field" autocomplete="off"
+              required />
 
-              </div>
+          </div>
 
-              <div class="input-wrap">
-                <label>Password</label>
-                <input type="password" id="password" name="userPassword" minlength="4" class="input-field"
-                  autocomplete="off" required />
+          <div class="input-wrap">
+            <label>Password</label>
+            <input type="password" id="password" name="userPassword" minlength="4" class="input-field"
+              autocomplete="off" required />
 
-              </div>
+          </div>
 
 
-              <input type="submit" value="Login" class="sign-btn" />
-
+          <input type="submit" value="Login" class="sign-btn" />
+          <a href="/user/forgotPassword" class="forgot-password">Forgot Password?</a><br />
+          <button onclick="window.location.href='/user/signup'">Sign up</button>
   </form>
+
 
 </body>
 

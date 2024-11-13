@@ -8,7 +8,7 @@ class UserModel { // 定義一個名為 UserModel 的類別
         this.userSchema = new mongoose.Schema({
             userID: { type: String, required: true, unique: true }, // userID 必须是字符串类型且必填
             userPassword: { type: String, required: true },
-            userEmail: { type: String, required: true },
+            userEmail: { type: String, required: true, unique: true },
             userRole: { type: String, required: true },
             personalInfo: {
                 type: {
@@ -62,7 +62,6 @@ class UserModel { // 定義一個名為 UserModel 的類別
         let result = await this.db.delete(this.User, { userID: userID }, "one").catch(err => {
             throw err;
         });
-        console.log(result);
         return result;
     }
 
