@@ -31,6 +31,7 @@ app.use(session({ // 設置會話規則
     saveUninitialized: true
 }));
 app.use('/public', express.static('public'));
+app.use('/uploads', express.static('uploads'));
 
 // ----------------------
 
@@ -42,6 +43,7 @@ app.use('/restaurant', restaurantRoutes); // 餐廳功能路由
 app.use('/admin', adminRoutes); // 管理員功能路由
 
 app.use('/customer', customerRoutes); // 顧客功能路由
+
 
 // 根路由 
 app.get('/', async (req, res) => {

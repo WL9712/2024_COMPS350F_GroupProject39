@@ -42,7 +42,7 @@
                             <tr>
                                 <td><%= restaurantsList[i].menuItems[j].itemName %></td>
                                 <td><%= restaurantsList[i].menuItems[j].itemPrice %></td>
-                                <td><img src="<%= restaurantsList[i].menuItems[j].itemImage %>" alt="menu image" width="100" height="100"></td>
+                                <td><img src="../<%= restaurantsList[i].menuItems[j].itemPicture.path %>" alt="menu image" width="100" height="100"></td>
                                 <td>
                                     <form action="/order" method="POST">
                                         <input type="hidden" name="itemName" value="<%= restaurantsList[i].menuItems[j].itemName %>"">

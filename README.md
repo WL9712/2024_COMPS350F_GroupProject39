@@ -48,31 +48,31 @@ If you have scripts defined in your package.json, you can run them using:
 ![folderStructure](/public/image/folderStructure.png "folderStructure")
 
 
-## All Functions
-- Login & Sign up (Finish) 
+## All Functions | 13...14 Pages
+- Login & Sign up (Finish) | 2 Pages
 
-### Customor
-- Browse Menu (Processing)
-- Place Order
-- Track Order
-- Rate Order
-- Make Payment
+### Customor + | 4...5 Pages
+- Browse Menu (Processing) | 1 Page
+- Place Order | 0...1 Page
+- Track Order | 1 Page
+- Rate Order | 1 Page
+- Make Payment | 1 Page
 
-### Restaurant
-- Manage Menu Page (Processing)
+### Restaurant | + 3 Pages
+- Manage Menu Page (Processing) | 1 Page
     - Insert Meun (Finish)
     - Delete Menu
-- Accept Order
-- Update Order Status
+- Accept Order | 1 Page
+- Update Order Status | 1 Page
 
 
-### Delivery Man
-- Accept Delivery Request
-- Deliver Order
-- Update Delivery Status
+### Delivery Man | 3 Pages
+- Accept Delivery Request | 1 Page
+- Deliver Order (Check the order status) | 1 Page
+- Update Delivery Status | 1 Page
 
-### Admin
-- Manage Users Page (Processing)
+### Admin | + 3 Pages
+- Manage Users Page (Processing) | 1 Page
     - Delete User (Finish)
-- View Analytics
-- Handle Complaints
+- View Analytics | 1 Page
+- Handle Complaints | 1 Page

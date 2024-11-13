@@ -12,7 +12,7 @@ class AdminController {
         } catch (err) {
             error = 'An error occurred while fetching restaurant data';
         }
-
+        
         const defaults = {
             error: undefined,
             success: undefined, 
@@ -27,7 +27,6 @@ class AdminController {
     // 渲染頁面
     async renderBrowseMenu(req, res,) {
         await this.renderWithDefaults(req, res, 'browseMenu');
-
     }
 
 }
