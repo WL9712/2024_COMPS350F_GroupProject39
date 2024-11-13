@@ -48,7 +48,7 @@ app.use('/customer', customerRoutes); // 顧客功能路由
 
 // 根路由 
 app.get('/', async (req, res) => {
-    res.render('index', { user: req.session.user });
+    res.render('mainPage', { user: req.session.user });
 });
 
 // ------------------------

@@ -14,8 +14,8 @@ class UserController {
     }
 
     // 渲染登入頁面
-    async renderLogin(req, res) {
-        this.renderWithDefaults(res, 'login');
+    async renderLoginPage(req, res) {
+        this.renderWithDefaults(res, 'loginPage');
     }
 
     // 登入功能
@@ -31,10 +31,10 @@ class UserController {
                 res.redirect('/'); // 成功後重定向到首頁
             } else {
                 // 登入失敗，渲染相同的登入頁面並顯示錯誤消息
-                return this.renderWithDefaults(res, 'login', { error: 'Invalid user account or password!' });
+                return this.renderWithDefaults(res, 'loginPage', { error: 'Invalid user account or password!' });
             }
         } catch (err) {
-            this.renderWithDefaults(res, 'login', { error: 'An error occurred!' });
+            this.renderWithDefaults(res, 'loginPage', { error: 'An error occurred!' });
         }
     }
 
@@ -45,8 +45,8 @@ class UserController {
 
     }
 
-    async renderSignup(req, res) {
-        this.renderWithDefaults(res, 'signup');
+    async renderSignupPage(req, res) {
+        this.renderWithDefaults(res, 'signupPage');
     }
 
     async signup(req, res) {
@@ -55,16 +55,18 @@ class UserController {
 
         try {
             const result = await userModel.insertUser(userID, userPassword, userEmail, userRole);
-            this.renderWithDefaults(res, 'login', { success: 'User account created successfully!' });
+            // create account balance for user
+            
+            this.renderWithDefaults(res, 'loginPage', { success: 'User account created successfully!' });
         } catch (err) {
             if (err.code === 11000) { // 重複鍵錯誤
                 if ('userID' in err.errorResponse.keyPattern) {
-                    this.renderWithDefaults(res, 'signup', { error: 'User ID already exists!' });
+                    this.renderWithDefaults(res, 'signupPage', { error: 'User ID already exists!' });
                 } else if ('userEmail' in err.errorResponse.keyPattern) {
-                    this.renderWithDefaults(res, 'signup', { error: 'User email already exists!' });
+                    this.renderWithDefaults(res, 'signupPage', { error: 'User email already exists!' });
                 }
             } else {
-                this.renderWithDefaults(res, 'signup', { error: 'An error occurred!' });
+                this.renderWithDefaults(res, 'signupPage', { error: 'An error occurred!' });
             }
         }
     }

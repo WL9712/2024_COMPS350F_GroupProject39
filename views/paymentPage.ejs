@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        .hidden {
+            display: none; /* 隐藏元素 */
+        }
+        .error-message {
+            color: red;
+        }
+        .success-message {
+            color: green;
+        }
+    </style>
+    <script>
+        function togglePaymentDetails() {
+            const paymentMethod = document.getElementById('paymentMethod').value; // 获取选择的付款方式
+            const cardDetails = document.getElementById('cardDetails'); // 获取信用卡输入区块
+            const accountBalance = document.getElementById('accountBalance'); // 获取账户余额区域
+
+            // 显示和隐藏逻辑
+            if (paymentMethod === 'paypal') { // 如果选择的是 PayPal
+                cardDetails.classList.add('hidden'); // 隐藏信用卡输入区域
+                accountBalance.classList.add('hidden'); // 隐藏账户余额区域
+            } else if (paymentMethod === 'balance') { // 如果选择的是 Account Balance
+                cardDetails.classList.add('hidden'); // 隐藏信用卡输入区域
+                accountBalance.classList.remove('hidden'); // 显示账户余额区域
+            } else { // 如果选择的是其他支付方式（信用卡或借记卡）
+                cardDetails.classList.remove('hidden'); // 显示信用卡输入区域
+                accountBalance.classList.add('hidden'); // 隐藏账户余额区域
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <a href="/">
+        <h1>COMP S350F - Group Project 39 - Payment Page</h1>
+    </a>
+
+    <% if (error) { %>
+        <p class="error-message">
+            <%= error %>
+        </p>
+    <% } else if (success) { %>
+        <p class="success-message">
+            <%= success %>
+        </p>
+    <% } %>
+
+    <h2>Payment Information:</h2>
+    <form action="/payment" method="POST">
+        <label for="paymentMethod">Payment Method:</label>
+        <select id="paymentMethod" name="paymentMethod" required onchange="togglePaymentDetails()"> 
+            <option value="balance">Account Balance</option>
+            <option value="creditCard">Credit Card</option>
+            <option value="debitCard">Debit Card</option>
+            <option value="paypal">PayPal</option>
+        </select><br/>
+
+        <div id="accountBalance">
+            Account Balance: $100 <!-- 示例账户余额信息 -->
+        </div>
+
+        <div id="cardDetails" class="hidden"> <!-- 信用卡输入区域 -->
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber" required>
+            <br>
+            <label for="cardHolder">Card Holder:</label>
+            <input type="text" id="cardHolder" name="cardHolder" required>
+            <br>
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="text" id="expiryDate" name="expiryDate" required placeholder="MM/YY">
+            <br>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" required>
+            <br>
+        </div>
+
+        <button type="submit">Pay</button>
+    </form>
+</body>
+
+</html>

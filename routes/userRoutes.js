@@ -4,13 +4,13 @@ const userController = require('../controllers/userController');
 const router = express.Router();
 
 // 登入功能頁面路由
-router.get('/login', (req, res) => userController.renderLogin(req, res));
+router.get('/loginPage', (req, res) => userController.renderLoginPage(req, res));
 
 // 登入功能路由 (通過 login.ejs 中的表格調用)
 router.post('/login', (req, res) => userController.login(req, res));
 
 
-router.get('/signup', (req, res) => userController.renderSignup(req, res));
+router.get('/signupPage', (req, res) => userController.renderSignupPage(req, res));
 
 router.post('/signup', (req, res) => userController.signup(req, res));
 

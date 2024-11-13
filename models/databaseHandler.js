@@ -43,10 +43,10 @@ class DatabaseHandler {
         }
     }
 
-    async findMany(mongooseModel, queryObject) {
+    async findMany(mongooseModel, queryObject, projection = {}, sortObject = {}) {
         try {
             await this.connect();
-            const result = await mongooseModel.find(queryObject);
+            const result = await mongooseModel.find(queryObject, projection).sort(sortObject);
             // console.log(debugLogheader("Databasehandler.findMany()") + 'Data found:', result);
             return result;
         } catch (err) {

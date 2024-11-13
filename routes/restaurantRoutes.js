@@ -13,8 +13,5 @@ router.get('/insertMenu', (req, res) => restaurantController.renderInsertMeun(re
 
 router.post('/insertMenu', upload.single('menuImage'), (req, res) => restaurantController.insertMenu(req, res));
 
-// 登入功能路由 (通過 login.ejs 中的表格調用)
-router.post('/login', (req, res) => userController.login(req, res));
-
 
 module.exports = router;

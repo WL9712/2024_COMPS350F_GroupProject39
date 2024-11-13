@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Index</title>
+    <title>Main Page</title>
 </head>
 
 <body>
@@ -14,8 +14,9 @@
         <button onclick="window.location.href='/user/logout'">Logout</button>
 
         <% if (user.userRole === 'customer') { %>
-            <button onclick="window.location.href='/customer/browseMenu'">Browes Menu</button>
-            <button onclick="window.location.href='/customer/viewCart'">View Cart</button>
+            <button onclick="window.location.href='/customer/menuPage'">Menu Page</button>
+            <button onclick="window.location.href='/customer/cartPage'">Cart Page</button>
+            <button onclick="window.location.href='/customer/orderHistoryPage'">Order History Page</button>
         <% } else if (user.userRole === 'restaurant') { %>
             <button onclick="window.location.href='/restaurant/registerRestaurant'">Register Restaurant</button>
             <button onclick="window.location.href='/restaurant/insertMenu'">Insert Menu</button>
@@ -25,8 +26,8 @@
 
     <% } else { %>
         <p>Please login!</p>
-        <button onclick="window.location.href='/user/login'">Login</button>
-        <button onclick="window.location.href='/user/signup'">Sign up</button>
+        <button onclick="window.location.href='/user/loginPage'">Login Page</button>
+        <button onclick="window.location.href='/user/signupPage'">Sign up Page</button>
     <% } %>
 </body>
 

@@ -23,16 +23,18 @@
 </head>
 
 <body>
-    <a href="/"><h1>COMP S350F - Group Project 39 - Browse Menus Page</h1></a>
+    <a href="/"><h1>COMP S350F - Group Project 39 - Menus Page</h1></a>
     <% if (error) { %>
         <p style="color: red;" class="error-message">
             <%= error %>
         </p>
-            <% } else if (success) { %>
+    <% } else if (success) { %>
         <p style="color: green;" class="success-message">
             <%= success %>
         </p>
     <% } %>
+    
+    
     <% if (user) { %>
         <% for (let i = 0; i < restaurantsList.length; i++) { %> <!-- 使用 let 声明循环变量 -->
             <h2><%= restaurantsList[i].restaurantName %></h2>
@@ -64,8 +66,8 @@
                                         <input type="number" name="itemQuantity" value="1" min="1" max="10">
                                     </td>
                                     <td>
-                                        <input type="hidden" name="restaurantID" value="<%= restaurantsList[i].restaurantID %>">
-                                        <input type="hidden" name="itemID" value="<%= restaurantsList[i].menuItems[j].itemID %>">
+                                        <input type="hidden" name="restaurantID" value="<%= restaurantsList[i]._id %>">
+                                        <input type="hidden" name="itemID" value="<%= restaurantsList[i].menuItems[j]._id %>">
                                         <input type="hidden" name="itemName" value="<%= restaurantsList[i].menuItems[j].itemName %>">
                                         <input type="hidden" name="itemPrice" value="<%= restaurantsList[i].menuItems[j].itemPrice %>">
                                         <input type="submit" value="Add To Cart">
@@ -78,7 +80,7 @@
                         <% } %>
                     <% } else { %>
                         <tr>
-                            <td colspan="6">No menus found.</td>
+                            <td colspan="7">No menus found.</td>
                         </tr>
                     <% } %>
                 </tbody>
@@ -86,8 +88,8 @@
         <% } %>
     <% } else { %>
         <p>Please login!</p>
-        <button onclick="window.location.href='/user/login'">Login</button>
-        <button onclick="window.location.href='/user/signup'">Sign up</button>
+        <button onclick="window.location.href='/user/loginPage'">Login</button>
+        <button onclick="window.location.href='/user/signupPage'">Sign up</button>
     <% } %>
 </body>
 </html>

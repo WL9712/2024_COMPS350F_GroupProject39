@@ -10,6 +10,8 @@
     <form action="/restaurant/registerRestaurant" method="POST">
         <% if (success) { %>
             <p style="color: green;">Restaurant registration successful</p>
+        <% } else if (error) { %>
+            <p style="color: red;">Error: <%= error %></p>
         <% } %>
         Restaruant Name:
         <input type="text" name="restaurantName" placeholder="restaurantName"><br/>

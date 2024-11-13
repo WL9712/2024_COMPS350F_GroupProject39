@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Cart</title>
+    <title>Cart Page</title>
     <style>
         table {
             width: 100%;
@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <a href="/"><h1>COMP S350F - Group Project 39 - View Cart Page</h1></a>
+    <a href="/"><h1>COMP S350F - Group Project 39 - Cart Page</h1></a>
     <% if (error) { %>
         <p style="color: red;" class="error-message">
             <%= error %>
@@ -41,6 +41,7 @@
                 <th>Price</th>
                 <th>Quantity</th>
                 <th>Subtotal</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -50,21 +51,28 @@
                         <td><%= item.itemName %></td>
                         <td><%= item.itemPrice %></td> 
                         <td><%= item.itemQuantity %></td>
-                        <td><%= (item.itemPrice * item.itemQuantity) %></td> <!-- 计算小计并保留两位小数 -->
+                        <td><%= (item.itemPrice * item.itemQuantity) %></td>
+                        <td>
+                            <form action="/customer/removeFromCart" method="post">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="itemID" value="<%= item.itemID %>">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
                     </tr>
                 <% }); %>
                 <tr>
-                    <td colspan="3"><strong>Total:</strong></td>
+                    <td colspan="4"><strong>Total:</strong></td>
                     <td><strong><%= itemTotalPrice %></strong></td> <!-- 显示总计并保留两位小数 -->
                 </tr>
             <% } else { %>
                 <tr>
-                    <td colspan="4">No items found!</td>
+                    <td colspan="5">No items found!</td>
                 </tr>
             <% } %>
         </tbody>
     </table><br/>
-    <form action="/customer/checkout" method="post">
+    <form action="/customer/checkoutPage" method="post">
         <button type="submit">Checkout</button>
     </form>
 </body>

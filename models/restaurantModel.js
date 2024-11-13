@@ -1,28 +1,19 @@
 const mongoose = require('mongoose'); // 引入 mongoose 模組，用來操作 MongoDB 資料庫
 const DatabaseHandler = require('./databaseHandler'); // 引入自定義的資料庫處理模組
 
+
 class RestaurantModel { // 定義一個名為 UserModel 的類別
 
     constructor() { // 構造函數，當創建 UserModel 的實例時會自動調用
         // 定義一個用戶的資料結構，包含用戶名和用戶密碼
         this.restaurantSchema = new mongoose.Schema({
-            restaurantID: { type: mongoose.Schema.Types.ObjectId, 
-                default: () => new mongoose.Types.ObjectId(),
-                required: true, 
-                unique: true },
             restaurantName: {
                 type: String,
-                required: true,
-                index: true
+                required: true
             },
             menuItems: { // 陣列本身是可選的，可以保持空
                 type: [
-                    {   
-                        itemID: { 
-                            type: mongoose.Schema.Types.ObjectId,
-                            default: () => new mongoose.Types.ObjectId(),
-                            unique: true
-                        },
+                    {
                         itemName: { type: String, required: true },
                         itemPrice: { type: Number, required: true },
                         itemDescription: { type: String, required: false },
@@ -117,7 +108,7 @@ class RestaurantModel { // 定義一個名為 UserModel 的類別
 
         };
         const queryObject = { restaurantName: restaurantName };
-        const updateMode =  "push" ;
+        const updateMode = "push";
         let result = await this.db.update(this.Restaurant, queryObject, updateMode, updateObject).catch(err => {
             throw err;
         });

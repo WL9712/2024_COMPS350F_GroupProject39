@@ -3,12 +3,18 @@ const customerController = require('../controllers/customerController');
 
 const router = express.Router();
 
-router.get('/browseMenu', (req, res) => customerController.renderBrowseMenu(req, res));
+router.get('/menuPage', (req, res) => customerController.renderMenuPage(req, res));
 
 router.post('/addToCart', (req, res) => customerController.addToCart(req, res));
 
-router.get('/viewCart', (req, res) => customerController.renderViewCart(req, res));
+router.get('/cartPage', (req, res) => customerController.renderCartPage(req, res));
 
-router.post('/checkout', (req, res) => customerController.checkout(req, res));
+router.post('/checkoutPage', (req, res) => customerController.renderCheckoutPage(req, res));
+
+router.post('/removeFromCart', (req, res) => customerController.removeFromCart(req, res));
+
+router.get('/paymentPage', (req, res) => customerController.renderPaymentPage(req, res));
+
+router.get('/orderHistoryPage', (req, res) => customerController.renderOrderHistoryPage(req, res));
 
 module.exports = router;
