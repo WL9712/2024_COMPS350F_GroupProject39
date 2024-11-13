@@ -39,6 +39,13 @@ class OrderModel {
         this.db = new DatabaseHandler(); // 創建一個新的 DatabaseHandler 實例來處理資料庫操作
     }
 
+    async createOrder(order) {
+        let result = await this.db.insertOne(this.Order, order).catch(err => {
+            throw err;
+        });
+        return result;
+    }
+
     async findAllOrder() {
         let result = await this.db.findAll(this.Order).catch(err => {
             throw err;

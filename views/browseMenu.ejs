@@ -64,6 +64,7 @@
                                         <input type="number" name="itemQuantity" value="1" min="1" max="10">
                                     </td>
                                     <td>
+                                        <input type="hidden" name="restaurantID" value="<%= restaurantsList[i].restaurantID %>">
                                         <input type="hidden" name="itemID" value="<%= restaurantsList[i].menuItems[j].itemID %>">
                                         <input type="hidden" name="itemName" value="<%= restaurantsList[i].menuItems[j].itemName %>">
                                         <input type="hidden" name="itemPrice" value="<%= restaurantsList[i].menuItems[j].itemPrice %>">

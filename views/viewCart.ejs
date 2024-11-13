@@ -24,6 +24,15 @@
 
 <body>
     <a href="/"><h1>COMP S350F - Group Project 39 - View Cart Page</h1></a>
+    <% if (error) { %>
+        <p style="color: red;" class="error-message">
+            <%= error %>
+        </p>
+    <% } else if (success) { %>
+        <p style="color: green;" class="success-message">
+            <%= success %>
+        </p>
+    <% } %>
     <h2>Your cart:</h2>
     <table>
         <thead>
@@ -54,6 +63,9 @@
                 </tr>
             <% } %>
         </tbody>
-    </table>
+    </table><br/>
+    <form action="/customer/checkout" method="post">
+        <button type="submit">Checkout</button>
+    </form>
 </body>
 </html>

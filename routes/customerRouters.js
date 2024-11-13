@@ -9,4 +9,6 @@ router.post('/addToCart', (req, res) => customerController.addToCart(req, res));
 
 router.get('/viewCart', (req, res) => customerController.renderViewCart(req, res));
 
+router.post('/checkout', (req, res) => customerController.checkout(req, res));
+
 module.exports = router;
