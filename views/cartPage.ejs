@@ -51,7 +51,7 @@
                         <td><%= item.itemName %></td>
                         <td><%= item.itemPrice %></td> 
                         <td><%= item.itemQuantity %></td>
-                        <td><%= (item.itemPrice * item.itemQuantity) %></td>
+                        <td><%= (item.itemPrice * item.itemQuantity).toFixed(2) %></td>
                         <td>
                             <form action="/customer/removeFromCart" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
