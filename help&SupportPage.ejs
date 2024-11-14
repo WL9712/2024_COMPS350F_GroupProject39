@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & Support</title>
+    <style>
+        /* Basic styles for chat window */
+        #chat-window {
+            display: none; /* Initially hidden */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            border: 1px solid #ccc;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        #messages {
+            list-style-type: none;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        #chat-input {
+            width: calc(100% - 50px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>COMP S350F - Group Project 39 - Help & Support</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/profile">Profile</a>
+            <a href="/orders">My Orders</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="faqs">
+            <h2>Frequently Asked Questions (FAQs)</h2>
+            <ul>
+                <li>
+                    <strong>Q: How can I track my order?</strong>
+                    <p>A: You can track your order by visiting the Order Tracking page and entering your Order ID.</p>
+                </li>
+                <li>
+                    <strong>Q: What should I do if my order is late?</strong>
+                    <p>A: If your order is late, please contact our support team for assistance.</p>
+                </li>
+                <li>
+                    <strong>Q: Can I change my order after placing it?</strong>
+                    <p>A: Unfortunately, once an order is placed, it cannot be changed. However, you can cancel it within 10 minutes.</p>
+                </li>
+                <li>
+                    <strong>Q: What payment methods do you accept?</strong>
+                    <p>A: We accept various payment methods including credit/debit cards and online payment services.</p>
+                </li>
+                <!-- Add more FAQs as needed -->
+            </ul>
+        </section>
+
+        <section class="contact-form">
+            <h2>Contact Us</h2>
+            <form action="/submit-support" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section class="live-chat">
+            <h2>Live Chat</h2>
+            <p>If you need immediate assistance, please use our live chat feature.</p>
+            <button onclick="startLiveChat()">Start Live Chat</button>
+            <div id="chat-window">
+                <h3>Live Chat</h3>
+                <ul id="messages"></ul>
+                <form id="chat-form" action="">
+                    <input id="chat-input" autocomplete="off" /><button>Send</button>
+                </form>
+                <button onclick="closeChat()">Close</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </footer>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+    
+        const chatForm = document.getElementById('chat-form');
+        const chatInput = document.getElementById('chat-input');
+        const messages = document.getElementById('messages');
+        const chatWindow = document.getElementById('chat-window');
+    
+        function startLiveChat() {
+            chatWindow.style.display = 'block'; // Show the chat window
+        }
+    
+        function closeChat() {
+            chatWindow.style.display = 'none'; // Hide the chat window
+        }
+    
+        // Check for 'openChat' parameter in the URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('openChat') === 'true') {
+            startLiveChat(); // Automatically open chat if parameter is present
+        }
+    
+        chatForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (chatInput.value) {
+                socket.emit('chat message', chatInput.value);
+                chatInput.value = '';
+            }
+        });
+    
+        socket.on('chat message', function(msg) {
+            const item = document.createElement('li');
+            item.textContent = msg;
+            messages.appendChild(item);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+    </script>
+</body>
+</html>

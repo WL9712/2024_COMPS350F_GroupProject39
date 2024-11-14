@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking</title>
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .profile-icon {
+            float: right;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            padding: 20px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-status {
+            margin-bottom: 20px;
+        }
+
+        .status-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        .status-step {
+            position: relative;
+            text-align: center;
+            flex: 1;
+        }
+
+        .status-step::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: lightgray;
+            z-index: 0;
+        }
+
+        .status-step.active::before {
+            background: green;
+        }
+
+        .status-step.active .status-circle {
+            background: green;
+        }
+
+        .status-circle {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: lightgray;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .status-label {
+            margin-top: 10px;
+        }
+
+        .order-details {
+            margin-bottom: 20px;
+        }
+
+        .order-details ul {
+            list-style-type: none;
+        }
+
+        .order-details img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .contact-options {
+            margin-top: 20px;
+        }
+
+        button {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        button:hover {
+            background: #218838;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: #333;
+            color: #fff;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">FoodApp</div>
+        <h1>COMP S350F - Group Project 39 - Order Tracking</h1>
+        <a href="/profile" class="profile-icon">Profile</a>
+    </header>
+
+    <main>
+        <section class="order-status">
+            <h2>Order ID: <strong><%= order.orderID %></strong></h2>
+            <h2>Current Order Status</h2>
+            <div class="status-indicator">
+                <div class="status-step <%= order.status === 'Placed' ? 'active' : '' %>">
+                    <div class="status-circle"></div>
+                    <div class="status-label">Placed</div>
+                </div>
+                <div class="status-step <%= order.status === 'Preparing' ? 'active' : '' %>">
+                    <div class="status-circle"></div>
+                    <div class="status-label">Preparing</div>
+                </div>
+                <div class="status-step <%= order.status === 'Out for Delivery' ? 'active' : '' %>">
+                    <div class="status-circle"></div>
+                    <div class="status-label">Out for Delivery</div>
+                </div>
+                <div class="status-step <%= order.status === 'Delivered' ? 'active' : '' %>">
+                    <div class="status-circle"></div>
+                    <div class="status-label">Delivered</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="order-details">
+            <h2>Order Details</h2>
+            <ul>
+                <li><strong>Order Date:</strong> <%= order.orderDate %></li>
+                <li><strong>Order Time:</strong> <%= order.orderTime %></li>
+                <li><strong>Total Amount:</strong> $<%= order.totalAmount %></li>
+                <li><strong>Items:</strong></li>
+                <ul>
+                    <% order.items.forEach(function(item) { %>
+                        <li>
+                            <img src="<%= item.imageUrl %>" alt="<%= item.name %>">
+                            <%= item.name %> - $<%= item.price %> x <%= item.quantity %>
+                        </li>
+                    <% }); %>
+                </ul>
+            </ul>
+        </section>
+
+        <section class="contact-options">
+            <h2>Need Help?</h2>
+            <p>Choose an option to get in touch with us:</p>
+            <button onclick="contactDeliveryPerson()">Contact Delivery Person</button>
+            <button onclick="contactSupport()">Contact Support</button>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact</a>
+        </nav>
+    </footer>
+    
+    <script>
+        function contactDeliveryPerson() {
+            // Implement contact delivery person functionality (e.g., open chat or call)
+            alert("Contacting Delivery Person...");
+        }
+
+        function contactSupport() {
+            // Redirect to Help & Support page and open chat
+            window.location.href = "/help-support?openChat=true";
+        }
+    </script>
+</body>
+</html>
