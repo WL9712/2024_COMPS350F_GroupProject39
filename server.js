@@ -3,6 +3,8 @@ const express = require('express');
 const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const UserModel = require('./models/userModel');
+const http = require('http');
+const socketIo = require('socket.io');
 require('./lib/debugLogheader');
 
 // 導入路由
@@ -13,6 +15,26 @@ const adminRoutes = require('./routes/adminRoutes');
 
 // 創建依賴實體
 const app = express();
+//Live Chat Implementation
+const app = express();
+const server = http.createServer(app);
+const io = socketIo(server);
+
+// Serve static files
+app.use(express.static('public'));
+
+// Socket.io connection
+io.on('connection', (socket) => {
+    console.log('A user connected');
+
+    socket.on('chat message', (msg) => {
+        io.emit('chat message', msg);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('User  disconnected');
+    });
+});
 
 // 創建配置參數
 const PORT = process.env.PORT || 3000;
