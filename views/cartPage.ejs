@@ -51,7 +51,7 @@
                         <td><%= item.itemName %></td>
                         <td><%= item.itemPrice %></td> 
                         <td><%= item.itemQuantity %></td>
-                        <td><%= (item.itemPrice * item.itemQuantity) %></td>
+                        <td><%= (item.itemPrice * item.itemQuantity).toFixed(2) %></td>
                         <td>
                             <form action="/customer/removeFromCart" method="post">
                                 <input type="hidden" name="_method" value="DELETE">
@@ -63,7 +63,7 @@
                 <% }); %>
                 <tr>
                     <td colspan="4"><strong>Total:</strong></td>
-                    <td><strong><%= itemTotalPrice %></strong></td> <!-- 显示总计并保留两位小数 -->
+                    <td><strong><%= itemTotalPrice.toFixed(2) %></strong></td> <!-- 显示总计并保留两位小数 -->
                 </tr>
             <% } else { %>
                 <tr>
